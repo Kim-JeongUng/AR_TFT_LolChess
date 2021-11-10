@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="BlueBoard" size="1000.000000 712.300232" />
+    <ImageTarget name="Champ" size="300.000000 426.284576" />
+    <ImageTarget name="Items2" size="150.000000 210.791016" />
+    <ImageTarget name="Items1" size="150.000000 285.119049" />
+    <ImageTarget name="Champ2" size="300.000000 225.000000" />
     <ImageTarget name="BF_Sword" size="200.000000 200.000000" />
     <ImageTarget name="Arrow" size="200.000000 200.000000" />
     <ImageTarget name="Armor" size="200.000000 200.000000" />
