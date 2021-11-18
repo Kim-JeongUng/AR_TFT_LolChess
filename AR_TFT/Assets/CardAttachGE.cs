@@ -5,6 +5,8 @@ using System.Linq;
 
 public class CardAttachGE : MonoBehaviour
 {
+    // 보드에 붙어서 어떤 챔피언이 붙었는지 전달
+
     public GameObject[] ChampionCard;
     float[] ChampionAttachTimer;
     // Start is called before the first frame update

@@ -6,6 +6,8 @@ using Vuforia;
 
 public class BoardGE : MonoBehaviour
 {
+    // 보드에 붙어서 버츄얼 버튼을 클릭(챔피언이 장착되었는지?)을 담당
+    
     public GameObject GameManager;
     // 일단 블루팀만 해당하게 개발(11.10) 김정웅
     private static readonly int boardSize = 6;
@@ -29,7 +31,7 @@ public class BoardGE : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < boardSize; i++) {
             BoardBtn[i] = GameObject.Find("BoardCheck" + (i + 1).ToString());
             BoardBtn[i].GetComponent<VirtualButtonBehaviour>().RegisterOnButtonPressed(OnButtonPressed);
             BoardBtn[i].GetComponent<VirtualButtonBehaviour>().RegisterOnButtonReleased(OnButtonReleased);
@@ -38,7 +40,7 @@ public class BoardGE : MonoBehaviour
     }
     void Update()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < boardSize; i++)
         {
             if (TempBoardBtnPressed[i] && !BoardBtnPressed[i])
             {
@@ -49,7 +51,7 @@ public class BoardGE : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < boardSize/2; i++)
         {
             // 챔피언 슬롯에 해당하는 버튼 2개가 동시에 눌리면
             if (BoardBtnPressed[i * 2] && BoardBtnPressed[i * 2 + 1])
@@ -72,7 +74,7 @@ public class BoardGE : MonoBehaviour
     }
     public void OnButtonPressed(VirtualButtonBehaviour vb)
     {
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < boardSize; i++) {
             if (vb.name == "BoardCheck" + (i + 1).ToString())
             {
                 TempBoardBtnPressed[i] = true;
@@ -82,7 +84,7 @@ public class BoardGE : MonoBehaviour
 
     public void OnButtonReleased(VirtualButtonBehaviour vb)
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < boardSize; i++)
         {
             if (vb.name == "BoardCheck" + (i + 1).ToString())
             {
