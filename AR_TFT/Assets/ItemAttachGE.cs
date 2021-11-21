@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class ItemAttachGE : MonoBehaviour
 {
-    // 각 챔피언 카드에 붙어서 어떤 아이템이 붙었는지 전달
+    // GameManager에 붙어서 각 챔피언 카드에 어떤 아이템이 붙었는지 전달
 
-    public GameObject[] ItemCard;
+    public GameObject[] ItemCard; // 모든 아이템 
     float[] ItemAttachTimer;
-    public bool[] ItemSlot = { false, false };
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +18,12 @@ public class ItemAttachGE : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    public void ItemAttach(int ItemSlotNum, Transform tf) // tf = 붙을 객체
+    public void ItemAttach(int ItemSlotNum, Transform tf) // CardCheckItem.cs에서 호출   tf = 붙을 객체
     {
-        if (!ItemSlot[ItemSlotNum])  // 아이템이 안 차있으면
+        if (tf.gameObject.GetComponent<ChampionCard>().MyItem[ItemSlotNum] == null)  // 아이템이 안 차있으면
         {
             // 모든 아이템 카드를 찾음 
             ItemCard = GameObject.FindGameObjectsWithTag("Item");
@@ -53,7 +52,7 @@ public class ItemAttachGE : MonoBehaviour
                 {
                     // 자식 등록 및 아이템 설정
                     ItemCard[minIndex].transform.parent = tf;
-                    ItemSlot[ItemSlotNum] = true;
+                    tf.gameObject.GetComponent<ChampionCard>().MyItem[ItemSlotNum] = ItemCard[minIndex].gameObject;
                     Debug.Log((minIndex + 1).ToString() + "아이템이 " + tf.name + "카드의슬롯" + (ItemSlotNum + 1).ToString() + "칸에 장착");
                 }
             }

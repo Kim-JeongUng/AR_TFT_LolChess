@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChapionCard : MonoBehaviour
+public class ChampionCard : MonoBehaviour
 {
     // 알고리즘
     // 챔피언 슬롯 위치에 챔피언 카드가 들어갔는지 판별
@@ -13,6 +13,8 @@ public class ChapionCard : MonoBehaviour
 
     public bool isattach = false;
     public float attachTimer;
+    public GameObject[] MyItem = new GameObject[2]; //장착된 아이템
+
     void Awake()
     {
         isattach = true;

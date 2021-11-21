@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
-public class CardGE : MonoBehaviour
+public class CardCheckItem : MonoBehaviour
 {
     // 각 챔피언 카드에 붙어서 버츄얼 버튼을 클릭(아이템이 장착되었는지?)을 담당
 

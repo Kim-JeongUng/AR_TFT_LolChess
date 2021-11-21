@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
-public class BoardGE : MonoBehaviour
+public class BoardCheckChampion : MonoBehaviour
 {
     // 보드에 붙어서 버츄얼 버튼을 클릭(챔피언이 장착되었는지?)을 담당
     
@@ -58,18 +58,15 @@ public class BoardGE : MonoBehaviour
             {
                 // 챔피언 슬롯이 차 있음
                 ChampionSlot[i] = true;
-                //Debug.Log("Champion slot" + (i + 1).ToString()+"is run");
-
                 // 구문 한번만 실행
                 if (!TempChampionSlot[i])
                 {
-                    GameManager.GetComponent<CardAttachGE>().CardAttach(i);
+                    GameManager.GetComponent<CardAttachGE>().CardAttach(i,this.transform); 
                     TempChampionSlot[i] = true;
                 }
             }
             else
                 TempChampionSlot[i] = false;
-
         }
     }
     public void OnButtonPressed(VirtualButtonBehaviour vb)
