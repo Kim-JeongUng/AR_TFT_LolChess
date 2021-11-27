@@ -13,6 +13,8 @@ public class BattleManager : MonoBehaviour
     public float attackSpeed = 1f;  // 공격 애니메이션 속도
     public float attackDelay = 1f;  // 공격 딜레이
 
+    public int Skill_trig = 5;  // 스킬을 사용하기 위한 공격 횟수 
+
     // Start is called before the first frame update
     void Start()
     {
