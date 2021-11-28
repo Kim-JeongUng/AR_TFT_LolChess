@@ -45,40 +45,54 @@ public class ChampionIdentity : MonoBehaviour
         {
             ChampHP += 200;
         }
-        if (NewItem.name == "Sword")
-        {
-            ChampAD += 30;
-        }
-        if (NewItem.name == "Wand")
-        {
-            ChampAP += 30;
-        }
         if (NewItem.name == "Bow")
         {
             ChampAS -= 0.1f;
         }
+        if (NewItem.name == "Sword")
+        {
+            ChampAD += 30;
+        }
         if (NewItem.name == "Tears")
         {
             ChampSkillTime *= 0.8f;   // 스킬쿨타임 20퍼 감소
+        }
+        if (NewItem.name == "Wand")
+        {
+            ChampAP += 30;
         }
     }
 
     //테스트 미시도
     public void GetCompleteItem(GameObject Item1, GameObject Item2) // 완성 아이템 관여
     {
-        if((Item1.name== "Sword" && Item2.name == "Wand") || (Item2.name == "Sword" && Item1.name == "Wand")) 
+        foreach (GameObject PickItems in CompleteItems)
         {
-            foreach ( GameObject PickItems in CompleteItems)
+            // 아이템 이름으로 완성아이템 검색 ex) Sword + Wand = SwordWand
+            if (PickItems.name == Item1.name+Item2.name || PickItems.name == Item2.name + Item1.name) 
             {
-                if (PickItems.name == "SwordWand") // 입힌 스킬피해의 일부 체력회복
-                {
-                    CompleteItem = PickItems;
-
-                }
+                CompleteItem = PickItems;
             }
         }
-
+        if (CompleteItem.name == "BeltBelt") 
+        {
+            // 기능 구현 - 매 초마다 체력 회복
+        }
+        else if (CompleteItem.name == "BeltBow") //
+        {
+            // 기능 구현 - 아군 전체 공격속도 0.1 빨라짐
+            foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
+            {
+                Team.ChampAS -= 0.1f;
+            }
+        }
+        else if (CompleteItem.name == "BeltSword")
+        {
+            // 기능 구현  
+        }
         Instantiate(CompleteItem, CompleteItemSpawn.transform.position, Quaternion.identity);
+
+        //삭제를 해야하나?
         Destroy(Item1);
         Destroy(Item2);
     }
