@@ -53,6 +53,8 @@ public class CardAttachGE : MonoBehaviour
                 ChampionSlot[minIndex] = true;
                 this.GetComponent<Board>().MyChampion[ChampionSlotNum]= ChampionCard[minIndex];
                 this.GetComponent<Board>().ChampionHP[ChampionSlotNum] = 100;  // 추후 챔피언카드에 정의된 체력으로 변경
+                this.GetComponent<Board>().EqupChampionCount++;  // 추후 챔피언카드에 정의된 체력으로 변경
+
                 Debug.Log((minIndex + 1).ToString() + "카드가 슬롯" + (ChampionSlotNum + 1).ToString() + "칸에 장착");
             }
             else // 버튼은 클릭됐지만 위에 등록된 카드가 없음

@@ -53,6 +53,7 @@ public class ItemAttachGE : MonoBehaviour
                     // 자식 등록 및 아이템 설정
                     ItemCard[minIndex].transform.parent = tf;
                     tf.gameObject.GetComponent<ChampionCard>().MyItem[ItemSlotNum] = ItemCard[minIndex].gameObject;
+                    tf.gameObject.GetComponent<ChampionIdentity>().GetNewItem(ItemCard[minIndex].gameObject);
                     Debug.Log((minIndex + 1).ToString() + "아이템이 " + tf.name + "카드의슬롯" + (ItemSlotNum + 1).ToString() + "칸에 장착");
                 }
             }
