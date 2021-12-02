@@ -61,7 +61,7 @@ public class BoardCheckChampion : MonoBehaviour
                 // 구문 한번만 실행
                 if (!TempChampionSlot[i])
                 {
-                    GameManager.GetComponent<CardAttachGE>().CardAttach(i,this.transform); 
+                    this.GetComponent<CardAttachGE>().CardAttach(i,this.transform); 
                     TempChampionSlot[i] = true;
                 }
             }
