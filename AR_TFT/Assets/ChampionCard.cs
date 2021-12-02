@@ -12,24 +12,22 @@ public class ChampionCard : MonoBehaviour
     // Start is called before the first frame update
 
     public bool isattach = false;
-    public float attachTimer;
+    public float attachTimer = 0.0f;
     public GameObject[] MyItem = new GameObject[2]; //장착된 아이템
 
-    void Awake()
+    void Start ()
     {
-        isattach = true;
-        attachTimer = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         // 추후 <자리를 찾는중> 이면으로 수정해야함
-        if (isattach == true)
+        if (isattach == true && attachTimer<100)
         {
             attachTimer += Time.deltaTime;
         }
-        if (GetComponent<MyDefaultTrackableEventHandler>().isAttach)
+        /*if (GetComponent<MyDefaultTrackableEventHandler>().isAttach)
         {
             isattach = true;
         }
@@ -38,8 +36,16 @@ public class ChampionCard : MonoBehaviour
         {
             isattach = false;
             attachTimer = 0.0f;
-        }
+        }*/
     }
-    
-  
+
+    public void CheckMark()
+    {
+        isattach = true;
+    }
+    public void LostMark()
+    {
+        isattach = false;
+    }
+
 }

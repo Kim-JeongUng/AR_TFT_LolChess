@@ -15,27 +15,37 @@ public class GameGE : MonoBehaviour
     //상대팀 보드와 내 보드 탐색
     public GameObject EnemyBoard;
     public GameObject MyBoard;
-
-
+    
     //최소거리 탐색
     public GameObject [] FoundObjects;
     public GameObject enemy;
     public string TagName;
     public float shortDis;
 
+    public static float[] ChampionAttachTimer = new float[4];
+
+    public static GameObject[] ChampionCards = new GameObject [4];
     public int Round; //게임 라운드
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
         isGamePlaying = false;
         Round = 0; // 게임 라운드
+        for (int i = 0; i < 4; i++)
+            ChampionCards[i] = GameObject.Find("ChampionCard" + (i + 1).ToString());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(BlueBoard.GetComponent<Board>().PlayerHP <= 0)
+
+        for(int i=0; i< 4; i++)
+            ChampionAttachTimer[i] = ChampionCards[i].GetComponent<ChampionCard>().attachTimer;
+
+        if (BlueBoard.GetComponent<Board>().PlayerHP <= 0)
         {
             //블루팀이 짐
             //GameOver(BlueBoard, RedBoard); //이긴팀, 진팀 다른 화면 출력
@@ -64,21 +74,21 @@ public class GameGE : MonoBehaviour
                 {
                     // 살아있는 챔피언 출력
                     if(BlueBoard.GetComponent<Board>().MyChampion[i].name != "EmptyGameObject")
-                        Debug.Log("BLUE Team" + i.ToString() + BlueBoard.GetComponent<Board>().MyChampion[i].name + "    HP:"+BlueBoard.GetComponent<Board>().ChampionHP[i].ToString());
-                    if (BlueBoard.GetComponent<Board>().ChampionHP[i] > 0) // 살아 있으면
+                        Debug.Log("BLUE Team" + i.ToString() + BlueBoard.GetComponent<Board>().MyChampion[i].name + "    HP:"+ BlueBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP.ToString());
+                    if (BlueBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP > 0) // 살아 있으면
                     {
                         //Fight
                         LookAroundEnemyChamp(BlueBoard.GetComponent<Board>().MyChampion, i);
                     }
                 }
-                if(BlueBoard.GetComponent<Board>().ChampionHP[0]<=0 && BlueBoard.GetComponent<Board>().ChampionHP[1]<=0 &&BlueBoard.GetComponent<Board>().ChampionHP[2] <=0)
+                if(BlueBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
                 {  
                     //블루 팀 라운드 패 // 남은 챔피언 수 만큼 체력 내리기
                     BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7 ; // 라운드 *3 만큼
                     Debug.Log("GameOver!");
                     isGamePlaying = false;
                 }
-                else if (RedBoard.GetComponent<Board>().ChampionHP[0] <= 0 && RedBoard.GetComponent<Board>().ChampionHP[1] <= 0 && RedBoard.GetComponent<Board>().ChampionHP[2] <= 0)
+                else if (RedBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && RedBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && RedBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
                 {
                     //레드 팀 라운드 패
                     RedBoard.GetComponent<Board>().PlayerHP -= Round*3; // 라운드 *3 만큼 체력 감소
@@ -108,7 +118,7 @@ public class GameGE : MonoBehaviour
             MyBoard = RedBoard;
         }
 
-        if (MyBoard.GetComponent<Board>().ChampionHP[index] > 0) { 
+        if (RedBoard.GetComponent<Board>().MyChampion[index].GetComponent<ChampionIdentity>().ChampHP > 0) { 
             FoundObjects = EnemyBoard.GetComponent<Board>().MyChampion;
 
             // 첫번째를 기준으로 잡아주기 
