@@ -57,7 +57,7 @@ public class GameGE : MonoBehaviour
         }*/
 
         // 보드에 챔피언들을 찾음
-        else if (BlueBoard.GetComponent<Board>().EqupChampionCount > 0) // && RedBoard.GetComponent<Board>().EqupChampionCount == 3 
+        else if (BlueBoard.GetComponent<Board>().EqupChampionCount > 0 && BlueBoard.GetComponent<Board>().EqupChampionCount > 0) // && RedBoard.GetComponent<Board>().EqupChampionCount == 3 
         {
             if (!isGamePlaying)
             {
@@ -70,18 +70,32 @@ public class GameGE : MonoBehaviour
             }
             else if (isGamePlaying) // 추후 보드판에 붙은 캐릭터가 6개 다 인식되면 if문 추가
             {
-                for (int i = 0; i < Board.ChampSize; i++)
+                for (int i = 0; i < 3; i++)
                 {
                     // 살아있는 챔피언 출력
-                    if(BlueBoard.GetComponent<Board>().MyChampion[i].name != "EmptyGameObject")
-                        Debug.Log("BLUE Team" + i.ToString() + BlueBoard.GetComponent<Board>().MyChampion[i].name + "    HP:"+ BlueBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP.ToString());
-                    if (BlueBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP > 0) // 살아 있으면
+                    if (BlueBoard.GetComponent<Board>().MyChampion[i].name != "EmptyGameObject")
                     {
-                        //Fight
-                        LookAroundEnemyChamp(BlueBoard.GetComponent<Board>().MyChampion, i);
+                        Debug.Log("BLUE Team" + (i+1).ToString() + BlueBoard.GetComponent<Board>().MyChampion[i].name + "    HP:" + BlueBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP.ToString());
+                        if (BlueBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP > 0) // 살아 있으면
+                        {
+                            //Fight
+                            StartCoroutine(LookAroundEnemyChamp(BlueBoard.GetComponent<Board>().MyChampion, i));
+                            
+
+                            
+                        }
+                    }
+                    if (RedBoard.GetComponent<Board>().MyChampion[i].name != "EmptyGameObject")
+                    {
+                        Debug.Log("RED Team" + (i+1).ToString() + RedBoard.GetComponent<Board>().MyChampion[i].name + "    HP:" + RedBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP.ToString());
+                        if (RedBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP > 0) // 살아 있으면
+                        {
+                            //Fight
+                            LookAroundEnemyChamp(RedBoard.GetComponent<Board>().MyChampion, i);
+                        }
                     }
                 }
-                if(BlueBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
+                /*if(BlueBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
                 {  
                     //블루 팀 라운드 패 // 남은 챔피언 수 만큼 체력 내리기
                     BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7 ; // 라운드 *3 만큼
@@ -93,7 +107,7 @@ public class GameGE : MonoBehaviour
                     //레드 팀 라운드 패
                     RedBoard.GetComponent<Board>().PlayerHP -= Round*3; // 라운드 *3 만큼 체력 감소
                     isGamePlaying = false;
-                }
+                }*/
             }
         }
         // BlueBoard.GetComponent<Board>().MyChampion =  
@@ -104,7 +118,7 @@ public class GameGE : MonoBehaviour
     }
 
     // 가까운 적 찾기
-    public void LookAroundEnemyChamp(GameObject[] OurCard, int index) // 테스트 아직 안함
+    IEnumerator LookAroundEnemyChamp(GameObject[] OurCard, int index) // 테스트 아직 안함
     {
         if (OurCard[index].transform.parent.name == "BlueBoard")
         {
@@ -118,7 +132,14 @@ public class GameGE : MonoBehaviour
             MyBoard = RedBoard;
         }
 
-        if (RedBoard.GetComponent<Board>().MyChampion[index].GetComponent<ChampionIdentity>().ChampHP > 0) { 
+        if (MyBoard.GetComponent<Board>().MyChampion[index].GetComponent<ChampionIdentity>().ChampHP <= 0)
+        {
+
+            OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<Animator>().SetBool("Attack", false);
+            OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<Animator>().SetBool("Death", true);
+        }
+        else if (MyBoard.GetComponent<Board>().MyChampion[index].GetComponent<ChampionIdentity>().ChampHP > 0)
+        {
             FoundObjects = EnemyBoard.GetComponent<Board>().MyChampion;
 
             // 첫번째를 기준으로 잡아주기 
@@ -128,18 +149,31 @@ public class GameGE : MonoBehaviour
             foreach (GameObject found in FoundObjects)
             {
                 // 상대가 체력이 있는지 확인
-                float Distance = Vector3.Distance(OurCard[index].transform.position, found.transform.position);
-                if (Distance < shortDis)
+                if (found.name != "EmptyGameObject" && found.GetComponent<ChampionIdentity>().ChampHP > 0)
                 {
-                    enemy = found;
-                    shortDis = Distance;
+                    float Distance = Vector3.Distance(OurCard[index].transform.position, found.transform.position);
+                    if (Distance < shortDis)
+                    {
+                        enemy = found;
+                        shortDis = Distance;
+                    }
                 }
             }
-            Quaternion lookOnLook = Quaternion.LookRotation(enemy.transform.position - OurCard[index].transform.position);
-            OurCard[index].transform.rotation = Quaternion.Slerp(OurCard[index].transform.rotation, lookOnLook, Time.deltaTime);
-
-            Debug.Log(enemy);
-            Debug.Log(shortDis);
+            if (enemy.name != "EmptyGameObject" && enemy.GetComponent<ChampionIdentity>().ChampHP > 0)
+            {
+                Quaternion lookOnLook = Quaternion.LookRotation(enemy.transform.GetChild(5).GetChild(0).position - OurCard[index].transform.GetChild(5).GetChild(0).position);
+                OurCard[index].transform.GetChild(5).GetChild(0).rotation = Quaternion.Slerp(OurCard[index].transform.GetChild(5).GetChild(0).rotation, lookOnLook, Time.deltaTime);
+                OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<Animator>().SetBool("Attack", true);
+                Debug.Log(enemy);
+            }
+            else
+            {
+                Debug.Log(MyBoard+"Win");
+            }
+            // 평타
+            //Debug.Log(shortDis);
         }
+
+        yield return new WaitForSeconds(2.0f);
     }
 }

@@ -22,7 +22,47 @@ public class ChampionIdentity : MonoBehaviour
     void Start()
     {
         // 기본 스텍 정의
+        if (ChampName == "Vayne")
+        {
+            ChampHP = 450;
+            ChampAD = 70;
+            ChampAP = 0;
+            ChampAS = 0.8f;
+            ChampSkillTime = 5.0f;
+        }
+        if (ChampName == "Soraka")
+        {
+            ChampHP = 450;
+            ChampAD = 70;
+            ChampAP = 0;
+            ChampAS = 0.8f;
+            ChampSkillTime = 5.0f;
+        }
+        if (ChampName == "Janna")
+        {
+            ChampHP = 450;
+            ChampAD = 70;
+            ChampAP = 0;
+            ChampAS = 0.8f;
+            ChampSkillTime = 5.0f;
+        }
         if (ChampName == "Caitlyn")
+        {
+            ChampHP = 450;
+            ChampAD = 70;
+            ChampAP = 0;
+            ChampAS = 0.8f;
+            ChampSkillTime = 5.0f;
+        }
+        if (ChampName == "Nidalee")
+        {
+            ChampHP = 450;
+            ChampAD = 70;
+            ChampAP = 0;
+            ChampAS = 0.8f;
+            ChampSkillTime = 5.0f;
+        }
+        if (ChampName == "Twistedfate")
         {
             ChampHP = 450;
             ChampAD = 70;

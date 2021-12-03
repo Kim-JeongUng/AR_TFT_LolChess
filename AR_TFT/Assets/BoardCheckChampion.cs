@@ -24,7 +24,6 @@ public class BoardCheckChampion : MonoBehaviour
     public bool[] TempChampionSlot = new bool[boardSize / 2];
 
 
-    float attachTimer = 0.0f;
     void Start()
     {
         for (int i = 0; i < boardSize; i++) {
