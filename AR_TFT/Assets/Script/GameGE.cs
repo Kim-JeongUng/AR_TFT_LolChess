@@ -79,8 +79,8 @@ public class GameGE : MonoBehaviour
                         if (BlueBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP > 0) // 살아 있으면
                         {
                             //Fight
-                            StartCoroutine(LookAroundEnemyChamp(BlueBoard.GetComponent<Board>().MyChampion, i));
                             
+                            LookAroundEnemyChamp(BlueBoard.GetComponent<Board>().MyChampion, i);
 
                             
                         }
@@ -118,7 +118,7 @@ public class GameGE : MonoBehaviour
     }
 
     // 가까운 적 찾기
-    IEnumerator LookAroundEnemyChamp(GameObject[] OurCard, int index) // 테스트 아직 안함
+    public void LookAroundEnemyChamp(GameObject[] OurCard, int index) // 테스트 아직 안함
     {
         if (OurCard[index].transform.parent.name == "BlueBoard")
         {
@@ -173,7 +173,5 @@ public class GameGE : MonoBehaviour
             // 평타
             //Debug.Log(shortDis);
         }
-
-        yield return new WaitForSeconds(2.0f);
     }
 }
