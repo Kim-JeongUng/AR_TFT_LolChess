@@ -13,9 +13,8 @@ public class BattleManager : MonoBehaviour
     public int MATK = 50;  // 주문력
     public float attackSpeed = 0.6f;  // 공격속도
 
-    public int CDR = 1; // 재사용 대기시간, 스킬가속
-    public float skillcool = 5f;  // 기본 스킬 쿨타임
-    private float skillcount;  // 스킬가속 계산한 실제 쿨타임
+    public float ChampSkillTime; // 스킬재사용대기시간
+    public float skillcount;
 
     public Animator anim;  // 공격 애니메이션
 
@@ -35,10 +34,17 @@ public class BattleManager : MonoBehaviour
         {
             anim.SetBool("Attack", true); // Attack Start
 
-            skillcool = (1 - CDR / (100 + CDR)) * skillcool; // 스킬가속에 따른 실제 쿨타임 초기화
 
-            skillcount = skillcool - Time.deltaTime;  //스킬 쿨타임
 
+            while(anim.GetBool("Attack") == true)
+            {
+                
+            }
+            
+        }
+        if(anim.GetBool("Attack") == true)
+        {
+            skillcount = ChampSkillTime - Time.deltaTime;  //스킬 쿨타임
             // skillcool 감소에 따라 마나 게이지 UI 작동
             if (skillcount <= 1.0f)
             {
