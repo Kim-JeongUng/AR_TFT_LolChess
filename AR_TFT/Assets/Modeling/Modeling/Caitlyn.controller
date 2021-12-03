@@ -24,7 +24,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -7071115323239299927, guid: 7d10a24f67eaad64a95491f456bc1575,
     type: 3}
-  m_Tag: 
+  m_Tag: skillanimation
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -49,7 +49,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.88235295
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -74,7 +74,7 @@ AnimatorStateMachine:
     m_Position: {x: 510, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5014842025332120308}
-    m_Position: {x: 250, y: 70, z: 0}
+    m_Position: {x: 250, y: 60, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -133,18 +133,6 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: Death
     m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Skill_coolTime
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Skill_trig
-    m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0

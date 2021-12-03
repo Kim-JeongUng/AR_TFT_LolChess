@@ -13,12 +13,14 @@ public class BattleManager : MonoBehaviour
     public int MATK = 50;  // 주문력
     public float attackSpeed = 0.6f;  // 공격속도
 
-    public float ChampSkillTime; // 스킬재사용대기시간
-    public float skillcount;
+    public float ChampSkillTime = 5.0f; //스킬사용 대기시간
+    public float skillcount = 0;
 
     public Animator anim;  // 공격 애니메이션
 
     public float attackDelay = 1f;  // 공격 딜레이
+
+    public ParticleSystem skillEfect;
 
     // Start is called before the first frame update
     private void Awake()
@@ -34,25 +36,30 @@ public class BattleManager : MonoBehaviour
         {
             anim.SetBool("Attack", true); // Attack Start
 
+            //StartCoroutine(CheckAnimationState());
 
-
-            /*while(anim.GetBool("Attack") == true)
-            {
-                
-            }*/
             
         }
-        /*if(anim.GetBool("Attack") == true)
+        if(anim.GetBool("Attack") == true)
         {
-            skillcount = ChampSkillTime - Time.deltaTime;  //스킬 쿨타임
+            skillcount = skillcount + Time.deltaTime;  //스킬 쿨타임
             // skillcool 감소에 따라 마나 게이지 UI 작동
-            if (skillcount <= 1.0f)
+            if (skillcount >= ChampSkillTime)
             {
                 //StartCoroutine("skillanim", (1.0f));
-                anim.SetBool("Attack", false); // Attack Stop
+               // anim.SetBool("Attack", false); // Attack Stop
                 anim.SetBool("Skill", true);  // skill animation start
+                
+
+                if (anim.GetCurrentAnimatorStateInfo(0).IsTag("skillanimation"))
+                {
+                    skillEfect.Play();
+
+                    anim.SetBool("Skill", false);
+                    skillcount = 0;
+                }
             }
-        }*/
+        }
 
         //-------------(실행 조건 없음)----------------
         if (Input.GetKeyDown(KeyCode.S))  // 공격종료 조건 없음
@@ -71,6 +78,7 @@ public class BattleManager : MonoBehaviour
             anim.SetBool("Attack", false);
         }
     }
+ 
     /*
     IEnumerator skillanim()
     { 
@@ -88,32 +96,7 @@ public class BattleManager : MonoBehaviour
     */
     void Update()
     {
-        //***************** (2021-11-18) 일정시간마다 총알 발사하는것 구현하기 메모
 
-        /*if (anim.GetBool("Attack") == true)
-        {
-            InvokeRepeating("Fire", 0.5f, 1.0f); //InvokeRepeating : 일정시간후 일정시간마다 반복
-        }*/
-    }
-    /*
-    void Fire()
-    {
-        GameObject blt = Instantiate(Bullet);
-        blt.transform.position = bltSpawnPoint.transform.position;
-        blt.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed * 1000, ForceMode.Impulse);
     }
 
-    
-    IEnumerator Fire()
-    {
-        GameObject blt = Instantiate(Bullet);
-        // 공격 애니메이터 실행 시
-        yield return new WaitForSeconds(attackDelay);
-        blt.transform.position = bltSpawnPoint.transform.position;
-        blt.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed * 1000, ForceMode.Impulse);
-        // 애니메이션딜레이에 맞춰서 총알생성
-        //Instantiate(Bullet, bltSpawnPoint.transform.position, bltSpawnPoint.transform.rotation);
-        // 총알 발사
-        //Bullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed, ForceMode.Impulse);
-    }*/
 }
