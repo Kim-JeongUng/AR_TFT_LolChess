@@ -9,13 +9,17 @@ public class ChampionIdentity : MonoBehaviour
     public GameObject[] CompleteItems; // 완성 아이템 배열 <<입력필요>>
     public GameObject CompleteItemSpawn; //완성아이템 등장 위치 <<입력필요>>
     public GameObject CompleteItem; // 선택된 완성 아이템 
+    public GameObject HPred, HPblack;
 
+    public int ChampFullHP;//최대 체력
     public int ChampHP; // 체력
     public int ChampAD; // 공격력
     public int ChampAP; // 주문력
     public float ChampAS; // 공격속도
     public float ChampSkillTime; // 스킬재사용대기시간
     public float ChampSkillDamage; // 스킬 데미지
+
+    public float per;//체력 비율 계산용
 
 
     // Start is called before the first frame update
@@ -24,6 +28,7 @@ public class ChampionIdentity : MonoBehaviour
         // 기본 스텍 정의
         if (ChampName == "Vayne")
         {
+            ChampFullHP = 450;
             ChampHP = 450;
             ChampAD = 70;
             ChampAP = 0;
@@ -32,6 +37,7 @@ public class ChampionIdentity : MonoBehaviour
         }
         if (ChampName == "Soraka")
         {
+            ChampFullHP = 450;
             ChampHP = 450;
             ChampAD = 70;
             ChampAP = 0;
@@ -40,6 +46,7 @@ public class ChampionIdentity : MonoBehaviour
         }
         if (ChampName == "Janna")
         {
+            ChampFullHP = 450;
             ChampHP = 450;
             ChampAD = 70;
             ChampAP = 0;
@@ -48,6 +55,7 @@ public class ChampionIdentity : MonoBehaviour
         }
         if (ChampName == "Caitlyn")
         {
+            ChampFullHP = 450;
             ChampHP = 450;
             ChampAD = 70;
             ChampAP = 0;
@@ -56,6 +64,7 @@ public class ChampionIdentity : MonoBehaviour
         }
         if (ChampName == "Nidalee")
         {
+            ChampFullHP = 450;
             ChampHP = 450;
             ChampAD = 70;
             ChampAP = 0;
@@ -64,6 +73,7 @@ public class ChampionIdentity : MonoBehaviour
         }
         if (ChampName == "Twistedfate")
         {
+            ChampFullHP = 450;
             ChampHP = 450;
             ChampAD = 70;
             ChampAP = 0;
@@ -75,6 +85,12 @@ public class ChampionIdentity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        per = ChampHP / ChampFullHP;
+
+        HPred.transform.localPosition = new Vector3(-50 + (50 * per), 150, 0);
+        HPred.transform.localScale = new Vector3(13, 50 * per, 13);
+        HPblack.transform.localPosition = new Vector3((50 * per), 150, 0);
+        HPblack.transform.localScale = new Vector3(13, -50 + (50 * per), 13);
     }
 
     //테스트 완료
