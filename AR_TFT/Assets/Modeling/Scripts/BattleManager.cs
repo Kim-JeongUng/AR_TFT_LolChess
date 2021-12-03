@@ -36,13 +36,13 @@ public class BattleManager : MonoBehaviour
 
 
 
-            while(anim.GetBool("Attack") == true)
+            /*while(anim.GetBool("Attack") == true)
             {
                 
-            }
+            }*/
             
         }
-        if(anim.GetBool("Attack") == true)
+        /*if(anim.GetBool("Attack") == true)
         {
             skillcount = ChampSkillTime - Time.deltaTime;  //스킬 쿨타임
             // skillcool 감소에 따라 마나 게이지 UI 작동
@@ -52,7 +52,7 @@ public class BattleManager : MonoBehaviour
                 anim.SetBool("Attack", false); // Attack Stop
                 anim.SetBool("Skill", true);  // skill animation start
             }
-        }
+        }*/
 
         //-------------(실행 조건 없음)----------------
         if (Input.GetKeyDown(KeyCode.S))  // 공격종료 조건 없음
