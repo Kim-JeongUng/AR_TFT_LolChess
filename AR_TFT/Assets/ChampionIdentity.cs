@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChampionIdentity : MonoBehaviour
 {   // 각 챔피언에 붙어서 기본 체력, 아이템 부여체력, 스킬사용 에니메이션 담당
 
-    public GameObject ChampName;
+    public string ChampName;
     public GameObject[] CompleteItems; // 완성 아이템 배열 <<입력필요>>
     public GameObject CompleteItemSpawn; //완성아이템 등장 위치 <<입력필요>>
     public GameObject CompleteItem; // 선택된 완성 아이템 
@@ -22,14 +22,13 @@ public class ChampionIdentity : MonoBehaviour
     void Start()
     {
         // 기본 스텍 정의
-        if (ChampName.name == "Caitlyn")
+        if (ChampName == "Caitlyn")
         {
             ChampHP = 450;
             ChampAD = 70;
             ChampAP = 0;
             ChampAS = 0.8f;
             ChampSkillTime = 5.0f;
-
         }
     }
 
@@ -102,20 +101,20 @@ public class ChampionIdentity : MonoBehaviour
     public void UseSkill()
     {
         //ChampName.GetComponent<Animation>().Play("Skill");
-        if (ChampName.name == "Caitlyn")
+        if (ChampName == "Caitlyn")
         {
             ChampSkillDamage = (ChampAP * 3) + (ChampAD * 0.8f);
             // 가장 먼 적에게 거리비례 데미지 궁극기
         }
-        if (ChampName.name == "vayne")
+        if (ChampName == "Vayne")
         {
             // 3대 마다 대상 체력 ?퍼 추가피해
         }
-        if (ChampName.name == "soraka")
+        if (ChampName == "Soraka")
         {
             // 아군 전체 체력 회복
         }
-        if (ChampName.name == "janna")
+        if (ChampName == "Janna")
         {
             // 피해가 가장 심한 챔프 3초간 큰 보호막 제공
         }
