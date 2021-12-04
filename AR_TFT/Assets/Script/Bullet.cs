@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Champion")  // Champion => 상대 적 챔피언이면
+        if (other.tag == "Champion")  // 캐릭터에 태그를 달아놨는데 이거를 블루/레드 상대편 챔피언이면 으로 바꿔야 할듯********************
         {
             Debug.Log("Bullet Trigger Champion");
             Destroy(gameObject);  // 총알 삭제
