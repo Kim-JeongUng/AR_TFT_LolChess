@@ -86,7 +86,6 @@ public class ChampionIdentity : MonoBehaviour
     void Update()
     {
         per = (float)ChampHP / (float)ChampFullHP;
-        Debug.Log(per);
         HPred.transform.localPosition = new Vector3(-50 + (50 * per), 150, 0);
         HPred.transform.localScale = new Vector3(13, 50 * per, 13);
         HPblack.transform.localPosition = new Vector3((50 * per), 150, 0);

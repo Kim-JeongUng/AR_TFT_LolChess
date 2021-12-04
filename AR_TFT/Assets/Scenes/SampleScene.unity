@@ -1154,12 +1154,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86793097a57ec84a80c25fd2e70a910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChampName: Caitlyn
+  ChampName: Twistedfate
   CompleteItems: []
   CompleteItemSpawn: {fileID: 1098379274}
   CompleteItem: {fileID: 0}
-  HPred: {fileID: 249981572}
-  HPblack: {fileID: 249981571}
+  HPred: {fileID: 909924030}
+  HPblack: {fileID: 424521171}
   ChampFullHP: 0
   ChampHP: 0
   ChampAD: 0
@@ -1330,7 +1330,7 @@ MonoBehaviour:
   mAspectRatio: 1.5951049
   mImageTargetType: 0
   mWidth: 75
-  mHeight: 119.632866
+  mHeight: 119.63287
   mRuntimeTexture: {fileID: 0}
 --- !u!4 &161315009
 Transform:
@@ -1605,12 +1605,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86793097a57ec84a80c25fd2e70a910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChampName: Caitlyn
+  ChampName: Nidalee
   CompleteItems: []
   CompleteItemSpawn: {fileID: 739446156}
   CompleteItem: {fileID: 0}
-  HPred: {fileID: 249981572}
-  HPblack: {fileID: 249981571}
+  HPred: {fileID: 1527813077}
+  HPblack: {fileID: 2037022844}
   ChampFullHP: 0
   ChampHP: 0
   ChampAD: 0
@@ -3050,6 +3050,12 @@ MonoBehaviour:
     e33: 1
   mPrevParent: {fileID: 2059978184}
   mPreviousVirtualSceneScaleFactor: 1
+--- !u!1 &424521171 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8712092930419317309, guid: 76bdd0312f10a1446b3b55cf76bc2ae1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1105914791}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &464036519
 Mesh:
   m_ObjectHideFlags: 0
@@ -3388,34 +3394,13 @@ GameObject:
   - component: {fileID: 492972637}
   - component: {fileID: 492972636}
   - component: {fileID: 492972635}
-  - component: {fileID: 492972634}
   m_Layer: 0
-  m_Name: Tears
+  m_Name: Item3
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &492972634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 492972633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e77bd07de849def4e8b61263027f32ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls: []
-  isAttach: 0
 --- !u!114 &492972635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3506,10 +3491,34 @@ MonoBehaviour:
   StatusFilter: 1
   OnTargetFound:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 492972635}
+        m_TargetAssemblyTypeName: ItemCard, Assembly-CSharp
+        m_MethodName: CheckMark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 492972635}
+        m_TargetAssemblyTypeName: ItemCard, Assembly-CSharp
+        m_MethodName: LostMark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &492972640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3652,7 +3661,7 @@ MonoBehaviour:
   m_Script: {fileID: -1539294719, guid: 4bc5fd733b147194692297d23f623541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mName: ChampionCard4ItemCheck1
+  mName: ChampionCard6ItemCheck1
   mSensitivity: 2
   mHasUpdatedPose: 1
   mPrevTransform:
@@ -4167,12 +4176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86793097a57ec84a80c25fd2e70a910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChampName: Caitlyn
+  ChampName: Vayne
   CompleteItems: []
   CompleteItemSpawn: {fileID: 1974461057}
   CompleteItem: {fileID: 0}
-  HPred: {fileID: 249981572}
-  HPblack: {fileID: 249981571}
+  HPred: {fileID: 209221651}
+  HPblack: {fileID: 209221650}
   ChampFullHP: 0
   ChampHP: 0
   ChampAD: 0
@@ -5442,9 +5451,8 @@ GameObject:
   - component: {fileID: 706702205}
   - component: {fileID: 706702204}
   - component: {fileID: 706702210}
-  - component: {fileID: 706702211}
   m_Layer: 0
-  m_Name: Sword
+  m_Name: Item1
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5526,10 +5534,34 @@ MonoBehaviour:
   StatusFilter: 1
   OnTargetFound:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 706702210}
+        m_TargetAssemblyTypeName: ItemCard, Assembly-CSharp
+        m_MethodName: CheckMark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 706702210}
+        m_TargetAssemblyTypeName: ItemCard, Assembly-CSharp
+        m_MethodName: LostMark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &706702208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5579,26 +5611,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isattach: 0
   attachTimer: 0
---- !u!114 &706702211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706702203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e77bd07de849def4e8b61263027f32ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls: []
-  isAttach: 0
 --- !u!1 &714424548
 GameObject:
   m_ObjectHideFlags: 0
@@ -5706,7 +5718,7 @@ MonoBehaviour:
   m_Script: {fileID: -1539294719, guid: 4bc5fd733b147194692297d23f623541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mName: ChampionCard4ItemCheck4
+  mName: ChampionCard5ItemCheck4
   mSensitivity: 2
   mHasUpdatedPose: 1
   mPrevTransform:
@@ -6901,6 +6913,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &909924030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8712092931172116848, guid: 76bdd0312f10a1446b3b55cf76bc2ae1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1105914791}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &913974752
 Mesh:
   m_ObjectHideFlags: 0
@@ -8298,34 +8316,13 @@ GameObject:
   - component: {fileID: 1066708318}
   - component: {fileID: 1066708317}
   - component: {fileID: 1066708316}
-  - component: {fileID: 1066708315}
   m_Layer: 0
-  m_Name: Wand
+  m_Name: Item5
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1066708315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066708314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e77bd07de849def4e8b61263027f32ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls: []
-  isAttach: 0
 --- !u!114 &1066708316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8416,10 +8413,34 @@ MonoBehaviour:
   StatusFilter: 1
   OnTargetFound:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1066708316}
+        m_TargetAssemblyTypeName: ItemCard, Assembly-CSharp
+        m_MethodName: CheckMark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1066708316}
+        m_TargetAssemblyTypeName: ItemCard, Assembly-CSharp
+        m_MethodName: LostMark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1066708321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8620,12 +8641,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86793097a57ec84a80c25fd2e70a910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChampName: Janna
+  ChampName: Caitlyn
   CompleteItems: []
   CompleteItemSpawn: {fileID: 1266827234}
   CompleteItem: {fileID: 0}
-  HPred: {fileID: 725595081}
-  HPblack: {fileID: 725595080}
+  HPred: {fileID: 249981572}
+  HPblack: {fileID: 249981571}
   ChampFullHP: 0
   ChampHP: 0
   ChampAD: 0
@@ -10287,7 +10308,7 @@ MonoBehaviour:
   m_Script: {fileID: -1539294719, guid: 4bc5fd733b147194692297d23f623541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mName: ChampionCard4ItemCheck4
+  mName: ChampionCard6ItemCheck4
   mSensitivity: 2
   mHasUpdatedPose: 1
   mPrevTransform:
@@ -10723,7 +10744,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 128
-    _typelessdata: 000016c20000000007446fc2000000000000803f000000000000000000000000000016c20000000007446f42000000000000803f00000000000000000000803f000016420000000007446fc2000000000000803f000000000000803f00000000000016420000000007446f42000000000000803f000000000000803f0000803f
+    _typelessdata: 000016c20000000008446fc2000000000000803f000000000000000000000000000016c20000000008446f42000000000000803f00000000000000000000803f000016420000000008446fc2000000000000803f000000000000803f00000000000016420000000008446f42000000000000803f000000000000803f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -10919,6 +10940,12 @@ MonoBehaviour:
     e33: 1
   mPrevParent: {fileID: 2053227374}
   mPreviousVirtualSceneScaleFactor: 1
+--- !u!1 &1527813077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8712092931172116848, guid: 76bdd0312f10a1446b3b55cf76bc2ae1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1041486349}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1577835652
 GameObject:
   m_ObjectHideFlags: 0
@@ -11026,7 +11053,7 @@ MonoBehaviour:
   m_Script: {fileID: -1539294719, guid: 4bc5fd733b147194692297d23f623541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mName: ChampionCard4ItemCheck3
+  mName: ChampionCard5ItemCheck3
   mSensitivity: 2
   mHasUpdatedPose: 1
   mPrevTransform:
@@ -11155,7 +11182,7 @@ MonoBehaviour:
   m_Script: {fileID: -1539294719, guid: 4bc5fd733b147194692297d23f623541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mName: ChampionCard4ItemCheck2
+  mName: ChampionCard5ItemCheck2
   mSensitivity: 2
   mHasUpdatedPose: 1
   mPrevTransform:
@@ -11382,7 +11409,7 @@ MonoBehaviour:
   m_Script: {fileID: -1539294719, guid: 4bc5fd733b147194692297d23f623541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mName: ChampionCard4ItemCheck3
+  mName: ChampionCard6ItemCheck3
   mSensitivity: 2
   mHasUpdatedPose: 1
   mPrevTransform:
@@ -12311,9 +12338,8 @@ GameObject:
   - component: {fileID: 1799436012}
   - component: {fileID: 1799436011}
   - component: {fileID: 1799436017}
-  - component: {fileID: 1799436018}
   m_Layer: 0
-  m_Name: Belt
+  m_Name: Item2
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12395,10 +12421,34 @@ MonoBehaviour:
   StatusFilter: 1
   OnTargetFound:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1799436017}
+        m_TargetAssemblyTypeName: ItemCard, Assembly-CSharp
+        m_MethodName: CheckMark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1799436017}
+        m_TargetAssemblyTypeName: ItemCard, Assembly-CSharp
+        m_MethodName: LostMark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1799436015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12448,26 +12498,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isattach: 0
   attachTimer: 0
---- !u!114 &1799436018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799436010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e77bd07de849def4e8b61263027f32ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls: []
-  isAttach: 0
 --- !u!1 &1801447350
 GameObject:
   m_ObjectHideFlags: 0
@@ -12483,34 +12513,13 @@ GameObject:
   - component: {fileID: 1801447354}
   - component: {fileID: 1801447353}
   - component: {fileID: 1801447352}
-  - component: {fileID: 1801447351}
   m_Layer: 0
-  m_Name: Bow
+  m_Name: Item4
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1801447351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801447350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e77bd07de849def4e8b61263027f32ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 0
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls: []
-  isAttach: 0
 --- !u!114 &1801447352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12601,10 +12610,34 @@ MonoBehaviour:
   StatusFilter: 1
   OnTargetFound:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1801447352}
+        m_TargetAssemblyTypeName: ItemCard, Assembly-CSharp
+        m_MethodName: CheckMark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTargetLost:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1801447352}
+        m_TargetAssemblyTypeName: ItemCard, Assembly-CSharp
+        m_MethodName: LostMark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1801447357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12776,7 +12809,7 @@ MonoBehaviour:
   m_Script: {fileID: -1539294719, guid: 4bc5fd733b147194692297d23f623541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mName: ChampionCard4ItemCheck1
+  mName: ChampionCard5ItemCheck1
   mSensitivity: 2
   mHasUpdatedPose: 1
   mPrevTransform:
@@ -13188,7 +13221,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 128
-    _typelessdata: 000016c200000000d1996fc2000000000000803f000000000000000000000000000016c200000000d1996f42000000000000803f00000000000000000000803f0000164200000000d1996fc2000000000000803f000000000000803f000000000000164200000000d1996f42000000000000803f000000000000803f0000803f
+    _typelessdata: 000016c200000000d0996fc2000000000000803f000000000000000000000000000016c200000000d0996f42000000000000803f00000000000000000000803f0000164200000000d0996fc2000000000000803f000000000000803f000000000000164200000000d0996f42000000000000803f000000000000803f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -14007,7 +14040,7 @@ MonoBehaviour:
   m_Script: {fileID: -1539294719, guid: 4bc5fd733b147194692297d23f623541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mName: ChampionCard4ItemCheck2
+  mName: ChampionCard6ItemCheck2
   mSensitivity: 2
   mHasUpdatedPose: 1
   mPrevTransform:
@@ -14059,6 +14092,12 @@ Transform:
   m_Father: {fileID: 2053227380}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2037022844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8712092930419317309, guid: 76bdd0312f10a1446b3b55cf76bc2ae1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1041486349}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &2037878817
 Mesh:
   m_ObjectHideFlags: 0
@@ -14472,12 +14511,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86793097a57ec84a80c25fd2e70a910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChampName: Vayne
+  ChampName: Soraka
   CompleteItems: []
   CompleteItemSpawn: {fileID: 2014234362}
   CompleteItem: {fileID: 0}
-  HPred: {fileID: 209221651}
-  HPblack: {fileID: 209221650}
+  HPred: {fileID: 411247906}
+  HPblack: {fileID: 411247905}
   ChampFullHP: 0
   ChampHP: 0
   ChampAD: 0
@@ -14522,12 +14561,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86793097a57ec84a80c25fd2e70a910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChampName: Soraka
+  ChampName: Janna
   CompleteItems: []
   CompleteItemSpawn: {fileID: 488996034}
   CompleteItem: {fileID: 0}
-  HPred: {fileID: 411247906}
-  HPblack: {fileID: 411247905}
+  HPred: {fileID: 725595081}
+  HPblack: {fileID: 725595080}
   ChampFullHP: 0
   ChampHP: 0
   ChampAD: 0
@@ -14698,7 +14737,7 @@ MonoBehaviour:
   mAspectRatio: 1.5973389
   mImageTargetType: 0
   mWidth: 75
-  mHeight: 119.80042
+  mHeight: 119.800415
   mRuntimeTexture: {fileID: 0}
 --- !u!4 &2059978194
 Transform:

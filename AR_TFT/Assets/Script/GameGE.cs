@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameGE : MonoBehaviour
 {
-    const int NumberOfChampion = 4;
+    const int NumberOfChampion = 6;
     const int NumberOfItem = 5;
 
     public GameObject BlueBoard;
@@ -41,8 +41,10 @@ public class GameGE : MonoBehaviour
         isGamePlaying = false;
         Round = 0; // 게임 라운드
         for (int i = 0; i < NumberOfChampion; i++)
-            ChampionCards[i] = GameObject.Find("ChampionCard" + (i + 1).ToString()); 
+            ChampionCards[i] = GameObject.Find("ChampionCard" + (i + 1).ToString());
 
+        for (int i = 0; i < NumberOfItem; i++)
+            ItemCards[i] = GameObject.Find("Item" + (i + 1).ToString());
     }
 
     // Update is called once per frame
@@ -52,7 +54,7 @@ public class GameGE : MonoBehaviour
         for(int i=0; i < NumberOfChampion; i++)
             ChampionAttachTimer[i] = ChampionCards[i].GetComponent<ChampionCard>().attachTimer;
         for (int i = 0; i < NumberOfItem; i++)
-            ItemAttachTimer[i] = ChampionCards[i].GetComponent<ChampionCard>().attachTimer;
+            ItemAttachTimer[i] = ItemCards[i].GetComponent<ItemCard>().attachTimer;
 
 
         if (BlueBoard.GetComponent<Board>().PlayerHP <= 0)
