@@ -90,6 +90,12 @@ public class ChampionIdentity : MonoBehaviour
         HPred.transform.localScale = new Vector3(13, 50 * per, 13);
         HPblack.transform.localPosition = new Vector3((50 * per), 150, 0);
         HPblack.transform.localScale = new Vector3(13, -50 + (50 * per), 13);
+
+        if (ChampHP <= 0)
+        {
+            this.gameObject.GetComponent<Animator>().SetBool("Attack", false);
+            this.gameObject.GetComponent<Animator>().SetBool("Death", true);
+        }
     }
 
     //테스트 완료

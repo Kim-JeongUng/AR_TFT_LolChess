@@ -133,7 +133,7 @@ public class GameGE : MonoBehaviour
     }
 
     // 가까운 적 찾기
-    public void LookAroundEnemyChamp(GameObject[] OurCard, int index) // 테스트 아직 안함
+    public void LookAroundEnemyChamp(GameObject[] OurCard, int index) 
     {
         if (OurCard[index].transform.parent.name == "BlueBoard")
         {
@@ -147,12 +147,6 @@ public class GameGE : MonoBehaviour
             MyBoard = RedBoard;
         }
 
-        if (MyBoard.GetComponent<Board>().MyChampion[index].GetComponent<ChampionIdentity>().ChampHP <= 0)
-        {
-
-            OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<Animator>().SetBool("Attack", false);
-            OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<Animator>().SetBool("Death", true);
-        }
         else if (MyBoard.GetComponent<Board>().MyChampion[index].GetComponent<ChampionIdentity>().ChampHP > 0)
         {
             FoundObjects = EnemyBoard.GetComponent<Board>().MyChampion;
@@ -178,6 +172,7 @@ public class GameGE : MonoBehaviour
             {
                 Quaternion lookOnLook = Quaternion.LookRotation(enemy.transform.GetChild(5).GetChild(0).position - OurCard[index].transform.GetChild(5).GetChild(0).position);
                 OurCard[index].transform.GetChild(5).GetChild(0).rotation = Quaternion.Slerp(OurCard[index].transform.GetChild(5).GetChild(0).rotation, lookOnLook, Time.deltaTime);
+                OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().target = enemy;
                 OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<Animator>().SetBool("Attack", true);
                 Debug.Log(enemy);
             }
