@@ -29,7 +29,10 @@ public class GameGE : MonoBehaviour
     public static float[] ItemAttachTimer = new float[NumberOfItem];
 
     public static GameObject[] ChampionCards = new GameObject [NumberOfChampion];
-    public static GameObject[] ItemCards = new GameObject[NumberOfItem];
+    public static GameObject[] ItemCards = new GameObject[NumberOfItem]; //아이템마커
+
+
+    public GameObject[] Items = new GameObject[NumberOfItem]; // 아이템 
 
     public int Round; //게임 라운드
 

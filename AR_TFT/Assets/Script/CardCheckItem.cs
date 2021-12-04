@@ -11,7 +11,7 @@ public class CardCheckItem : MonoBehaviour
 
     public bool[] ItemSlot = { false, false };
 
-    // 아이템 카드 두칸
+    // 아이템 카드 장착 두칸
     private static readonly int ItemSize = 4;
     public GameObject[] ItemBtn = new GameObject[ItemSize];
 
@@ -27,12 +27,13 @@ public class CardCheckItem : MonoBehaviour
     // 한번만 실행하는 아이템 슬롯 함수
     public bool[] TempItemSlot = new bool[ItemSize / 2];
 
+    public GameObject[] ItemSlotSpace = new GameObject[2];
 
     void Start()
     {
         for (int i = 0; i < ItemSize; i++)
         {
-            ItemBtn[i] = transform.Find("ItemCheck" + (i + 1).ToString()).gameObject;
+            ItemBtn[i] = transform.Find(transform.name+"ItemCheck" + (i + 1).ToString()).gameObject;
             ItemBtn[i].GetComponent<VirtualButtonBehaviour>().RegisterOnButtonPressed(OnButtonPressed);
             ItemBtn[i].GetComponent<VirtualButtonBehaviour>().RegisterOnButtonReleased(OnButtonReleased);
         }
@@ -89,7 +90,6 @@ public class CardCheckItem : MonoBehaviour
         {
             if (vb.name == transform.name + "ItemCheck" + (i + 1).ToString())
             {
-                ItemBtnPressed[i] = false;
                 TempItemBtnPressed[i] = false;
                 tempBtnTimer[i] = 0;
             }
@@ -110,7 +110,7 @@ public class CardCheckItem : MonoBehaviour
             int minIndex = 100;
 
             // 가장 최근에 인식된 카드 탐색
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < GameGE.ItemAttachTimer.Length; i++)
             {
                 // 최소 시간, 카드 탐색
                 if (minTime > GameGE.ItemAttachTimer[i])
@@ -126,7 +126,8 @@ public class CardCheckItem : MonoBehaviour
             }
             if (minIndex < 100)
             {
-                GameGE.ChampionCards[minIndex].transform.parent = this.transform;
+                Instantiate(GameManager.GetComponent<GameGE>().Items[minIndex], ItemSlotSpace[ItemSlotNum].transform.position, GameManager.GetComponent<GameGE>().Items[minIndex].transform.rotation, ItemSlotSpace[ItemSlotNum].transform);
+                //GameGE.ItemCards[minIndex].transform.parent = this.transform;
                 ItemSlot[ItemSlotNum] = true;
                 this.GetComponent<ChampionCard>().MyItem[ItemSlotNum] = GameGE.ItemCards[minIndex];
                 this.GetComponent<ChampionCard>().EqupItemCount++;
