@@ -90,8 +90,19 @@ public class ChampionIdentity : MonoBehaviour
         HPred.transform.localScale = new Vector3(13, 50 * per, 13);
         HPblack.transform.localPosition = new Vector3((50 * per), 150, 0);
         HPblack.transform.localScale = new Vector3(13, -50 + (50 * per), 13);
+        if (!GameGE.isGamePlaying)
+        {
+            ChampHP = ChampFullHP;
+            HPred.SetActive(false);
+            HPblack.SetActive(false);
+        }
+        else if (GameGE.isGamePlaying)
+        {
+            HPred.SetActive(true);
+            HPblack.SetActive(true);
+        }
 
-        if (ChampHP <= 0)
+        if (ChampHP <= 0 && GameGE.isGamePlaying)
         {
             this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Attack", false);
             this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Death", true);

@@ -10,10 +10,8 @@ public class GameGE : MonoBehaviour
     public GameObject BlueBoard;
     public GameObject RedBoard;
 
-    // 인식되면 3초후 게임 시작
-    public GameObject GameStartCard;
-
-    public bool isGamePlaying;
+    public static bool isGamePlaying;
+    public bool GameCard;
 
     //상대팀 보드와 내 보드 탐색
     public GameObject EnemyBoard;
@@ -37,6 +35,7 @@ public class GameGE : MonoBehaviour
     public int Round; //게임 라운드
 
     
+
 
     // Start is called before the first frame update
     void Start()
@@ -72,19 +71,33 @@ public class GameGE : MonoBehaviour
         }*/
 
         // 보드에 챔피언들을 찾음
-        else if (BlueBoard.GetComponent<Board>().EqupChampionCount > 0 && BlueBoard.GetComponent<Board>().EqupChampionCount > 0) // && RedBoard.GetComponent<Board>().EqupChampionCount == 3 
+        else if (BlueBoard.GetComponent<Board>().EqupChampionCount > 0 && RedBoard.GetComponent<Board>().EqupChampionCount > 0) // && RedBoard.GetComponent<Board>().EqupChampionCount == 3 
         {
             if (!isGamePlaying)
             {
-                if (!isGamePlaying && GameStartCard.GetComponent<MyDefaultTrackableEventHandler>().isAttach) // 게임 시작 카드 확인
+                if (!isGamePlaying && GameCard) // 게임 시작 카드 확인
                 {
-                    isGamePlaying = true;
                     Round++; //라운드
                     Debug.Log("startCard Check!");
+                    isGamePlaying = true;
                 }
             }
-            else if (isGamePlaying) // 추후 보드판에 붙은 캐릭터가 6개 다 인식되면 if문 추가
+            else if (isGamePlaying) 
             {
+                if (BlueBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
+                {
+                    //블루 팀 라운드 패 
+                    BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7; // 라운드 *3 만큼
+                    Debug.Log("RedBoard Win GameOver!");
+                    isGamePlaying = false;
+                }
+                else if (RedBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && RedBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && RedBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
+                {
+                    //레드 팀 라운드 패
+                    RedBoard.GetComponent<Board>().PlayerHP -= Round * 7;
+                    Debug.Log("BlueBoard Win GameOver!");
+                    isGamePlaying = false;
+                }
                 for (int i = 0; i < 3; i++)
                 {
                     // 살아있는 챔피언 출력
@@ -94,10 +107,7 @@ public class GameGE : MonoBehaviour
                         if (BlueBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP > 0) // 살아 있으면
                         {
                             //Fight
-                            
                             LookAroundEnemyChamp(BlueBoard.GetComponent<Board>().MyChampion, i);
-
-                            
                         }
                     }
                     if (RedBoard.GetComponent<Board>().MyChampion[i].name != "EmptyGameObject")
@@ -109,21 +119,6 @@ public class GameGE : MonoBehaviour
                             LookAroundEnemyChamp(RedBoard.GetComponent<Board>().MyChampion, i);
                         }
                     }
-                }
-                if(BlueBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
-                {  
-                    //블루 팀 라운드 패 // 남은 챔피언 수 만큼 체력 내리기
-                    BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7 ; // 라운드 *3 만큼
-                    Debug.Log("RedBoard Win GameOver!");
-                    isGamePlaying = false;
-                }
-                else if (RedBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && RedBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && RedBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
-                {
-                    //레드 팀 라운드 패
-                    RedBoard.GetComponent<Board>().PlayerHP -= Round*7; // 라운드 *3 만큼 체력 감소
-                    isGamePlaying = false;
-
-                    Debug.Log("B win GameOver!");
                 }
             }
         }
@@ -185,5 +180,13 @@ public class GameGE : MonoBehaviour
             // 평타
             //Debug.Log(shortDis);
         }
+    }
+    public void GameStartCard()
+    {
+        GameCard = true;
+    }
+    public void LostGameStartCard()
+    {
+        GameCard = false;
     }
 }
