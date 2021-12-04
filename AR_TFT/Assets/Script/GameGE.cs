@@ -84,7 +84,7 @@ public class GameGE : MonoBehaviour
             }
             else if (isGamePlaying) 
             {
-                if (BlueBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
+                /*if (BlueBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
                 {
                     //블루 팀 라운드 패 
                     BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7; // 라운드 *3 만큼
@@ -97,7 +97,7 @@ public class GameGE : MonoBehaviour
                     RedBoard.GetComponent<Board>().PlayerHP -= Round * 7;
                     Debug.Log("BlueBoard Win GameOver!");
                     isGamePlaying = false;
-                }
+                }*/
                 for (int i = 0; i < 3; i++)
                 {
                     // 살아있는 챔피언 출력
@@ -112,7 +112,7 @@ public class GameGE : MonoBehaviour
                     }
                     if (RedBoard.GetComponent<Board>().MyChampion[i].name != "EmptyGameObject")
                     {
-                        Debug.Log("RED Team" + (i+1).ToString() + RedBoard.GetComponent<Board>().MyChampion[i].name + "    HP:" + RedBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP.ToString());
+                        Debug.Log("RED Team" + (i + 1).ToString() + RedBoard.GetComponent<Board>().MyChampion[i].name + "    HP:" + RedBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP.ToString());
                         if (RedBoard.GetComponent<Board>().MyChampion[i].GetComponent<ChampionIdentity>().ChampHP > 0) // 살아 있으면
                         {
                             //Fight
@@ -132,19 +132,20 @@ public class GameGE : MonoBehaviour
     // 가까운 적 찾기
     public void LookAroundEnemyChamp(GameObject[] OurCard, int index) 
     {
+        Debug.Log(OurCard[index].transform.parent.name);
+        if (OurCard[index].transform.parent.name == "RedBoard")
+        {
+            EnemyBoard = BlueBoard;
+            MyBoard = RedBoard;
+        }
         if (OurCard[index].transform.parent.name == "BlueBoard")
         {
             EnemyBoard = RedBoard;
             MyBoard = BlueBoard;
 
         }
-        if (OurCard[index].transform.parent.name == "RedBoard")
-        {
-            EnemyBoard = BlueBoard;
-            MyBoard = RedBoard;
-        }
 
-        else if (MyBoard.GetComponent<Board>().MyChampion[index].GetComponent<ChampionIdentity>().ChampHP > 0)
+        if (MyBoard.GetComponent<Board>().MyChampion[index].GetComponent<ChampionIdentity>().ChampHP > 0)
         {
             FoundObjects = EnemyBoard.GetComponent<Board>().MyChampion;
 
