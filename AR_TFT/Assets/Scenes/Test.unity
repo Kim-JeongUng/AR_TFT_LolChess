@@ -542,8 +542,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102582053}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 120, z: 50}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 88, z: 95}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1229342045}
@@ -1968,8 +1968,18 @@ PrefabInstance:
         type: 3}
       propertyPath: Bullet
       value: 
-      objectReference: {fileID: 8130908452436988879, guid: 335a8586bc7138c44a71b1eef43fcf91,
+      objectReference: {fileID: 3107793643004386071, guid: 335a8586bc7138c44a71b1eef43fcf91,
         type: 3}
+    - target: {fileID: 7175260701764537918, guid: 7ddae41ddf0fd2c46974019fc413f085,
+        type: 3}
+      propertyPath: skillDelay
+      value: 2.215
+      objectReference: {fileID: 0}
+    - target: {fileID: 7175260701764537918, guid: 7ddae41ddf0fd2c46974019fc413f085,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1690079280}
     - target: {fileID: 7212828073547508168, guid: 7ddae41ddf0fd2c46974019fc413f085,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12320,6 +12330,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 083a93454c9e2604cbfce82f1b12ca54, type: 3}
+--- !u!1 &1690079280 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 772805628233609672, guid: cfe1dd92f850981459c4f658d0dcf75a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2097967378}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1690079281
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690079280}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 30
+  m_Height: 200
+  m_Direction: 1
+  m_Center: {x: 0, y: 60, z: 0}
 --- !u!21 &1708021288
 Material:
   serializedVersion: 6
@@ -15750,7 +15780,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Bullet
       value: 
-      objectReference: {fileID: 8130908452436988879, guid: 335a8586bc7138c44a71b1eef43fcf91,
+      objectReference: {fileID: 3107793643004386071, guid: 335a8586bc7138c44a71b1eef43fcf91,
         type: 3}
     - target: {fileID: 466376884486425756, guid: cfe1dd92f850981459c4f658d0dcf75a,
         type: 3}
@@ -15762,6 +15792,11 @@ PrefabInstance:
       propertyPath: attackDelay
       value: 1.917
       objectReference: {fileID: 0}
+    - target: {fileID: 466376884486425756, guid: cfe1dd92f850981459c4f658d0dcf75a,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1229342042}
     - target: {fileID: 772805628233609672, guid: cfe1dd92f850981459c4f658d0dcf75a,
         type: 3}
       propertyPath: m_Name

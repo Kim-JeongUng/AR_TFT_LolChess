@@ -19,6 +19,7 @@ public class BattleManager : MonoBehaviour
 
     public Animator anim;  // 공격 애니메이션
 
+    public GameObject target;
     public float attackDelay = 1.917f;  // 공격 애니메이션 딜레이******** 챔피언마다 값 교체 필요함
     public float skillDelay = 1.25f;  // 스킬 애니메이션 딜레이 ********* 챔피언마다 값 교체 필요함
 
@@ -43,7 +44,7 @@ public class BattleManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))  // 전투마커 인식 시 실행
         {
             anim.SetBool("Attack", true); // Attack Start
-            StartCoroutine(Firebullet());
+            StartCoroutine(Firebullet(target));
 
         }
         if (anim.GetBool("Attack") == true)
@@ -70,7 +71,7 @@ public class BattleManager : MonoBehaviour
             if (anim.GetCurrentAnimatorStateInfo(0).IsTag("attack")) // attack 애니메이션 실행되면
             {
                 // 일반공격 스피어 발사
-                firebullet();
+                firebullet(target);
             }
         }
 
@@ -91,19 +92,19 @@ public class BattleManager : MonoBehaviour
             anim.SetBool("Attack", false);
         }
     }
-    void firebullet()
+    public void firebullet(GameObject Target)
     {
         atk = atk + Time.deltaTime;
-        if (atk >= (attackDelay/ attackSpeed) && anim.GetBool("Skill") == false)
+        if (atk >= (attackDelay/ attackSpeed))
         {
-            StartCoroutine(Firebullet());
+            StartCoroutine(Firebullet(Target));
         }
     } 
-    IEnumerator Firebullet()
+    IEnumerator Firebullet(GameObject Target)
     {
         GameObject a = Instantiate(Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
         bulletTarget = a.GetComponent<Bullet>();
-        bulletTarget.Target = GameObject.Find("Caitlyn").transform;  // 가장 가까운 상대 챔피언으로 교체 필요함-----------------
+        bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언으로 교체 필요함-----------------
         atk = 0;
 
         yield return new WaitForSeconds((attackDelay / attackSpeed));

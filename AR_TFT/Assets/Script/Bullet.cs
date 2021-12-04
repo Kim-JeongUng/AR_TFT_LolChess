@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     public void FixedUpdate() // 유도탄
     {
         bulletrigid.velocity = transform.forward * bulletVelocity;
-        var bulletTargetRotation = Quaternion.LookRotation(Target.position + new Vector3(0, 60f) - transform.position);
+        var bulletTargetRotation = Quaternion.LookRotation(Target.position + new Vector3(0, 50f) - transform.position);
         bulletrigid.MoveRotation(Quaternion.RotateTowards(transform.rotation, bulletTargetRotation,turn));
     }
     private void OnTriggerEnter(Collider other)
