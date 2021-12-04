@@ -110,19 +110,21 @@ public class GameGE : MonoBehaviour
                         }
                     }
                 }
-                /*if(BlueBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
+                if(BlueBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
                 {  
                     //블루 팀 라운드 패 // 남은 챔피언 수 만큼 체력 내리기
                     BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7 ; // 라운드 *3 만큼
-                    Debug.Log("GameOver!");
+                    Debug.Log("RedBoard Win GameOver!");
                     isGamePlaying = false;
                 }
                 else if (RedBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && RedBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && RedBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
                 {
                     //레드 팀 라운드 패
-                    RedBoard.GetComponent<Board>().PlayerHP -= Round*3; // 라운드 *3 만큼 체력 감소
+                    RedBoard.GetComponent<Board>().PlayerHP -= Round*7; // 라운드 *3 만큼 체력 감소
                     isGamePlaying = false;
-                }*/
+
+                    Debug.Log("B win GameOver!");
+                }
             }
         }
         // BlueBoard.GetComponent<Board>().MyChampion =  

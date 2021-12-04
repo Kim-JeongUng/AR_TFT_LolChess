@@ -8,9 +8,6 @@ public class BattleManager : MonoBehaviour
     //public Transform bltSpawnPoint;  // 총알 스폰위치
     //private float bulletSpeed = 2f;  // 총알 발사 속도
 
-    public int HP = 100;  // 체력
-    public int ATK = 50;  // 공격력
-    public int MATK = 50;  // 주문력
     public float attackSpeed = 0.6f;  // 공격속도
     public float atk = 0;
 

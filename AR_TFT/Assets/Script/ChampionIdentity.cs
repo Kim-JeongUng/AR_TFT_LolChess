@@ -93,8 +93,8 @@ public class ChampionIdentity : MonoBehaviour
 
         if (ChampHP <= 0)
         {
-            this.gameObject.GetComponent<Animator>().SetBool("Attack", false);
-            this.gameObject.GetComponent<Animator>().SetBool("Death", true);
+            this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Attack", false);
+            this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Death", true);
         }
     }
 
