@@ -14,7 +14,7 @@ public class ChampionCard : MonoBehaviour
     public bool isattach = false;
     public float attachTimer = 0.0f;
     public GameObject[] MyItem = new GameObject[2]; //장착된 아이템
-
+    public int EqupItemCount = 0;
     void Start ()
     {
     }
@@ -27,16 +27,7 @@ public class ChampionCard : MonoBehaviour
         {
             attachTimer += Time.deltaTime;
         }
-        /*if (GetComponent<MyDefaultTrackableEventHandler>().isAttach)
-        {
-            isattach = true;
-        }
-        // 추후 <원래 자리에서 이탈하면> 으로 수정해야함
-        if (!GetComponent<MyDefaultTrackableEventHandler>().isAttach)
-        {
-            isattach = false;
-            attachTimer = 0.0f;
-        }*/
+        
     }
 
     public void CheckMark()

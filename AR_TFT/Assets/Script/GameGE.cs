@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameGE : MonoBehaviour
 {
+    const int NumberOfChampion = 4;
+    const int NumberOfItem = 5;
+
     public GameObject BlueBoard;
     public GameObject RedBoard;
 
@@ -22,9 +25,12 @@ public class GameGE : MonoBehaviour
     public string TagName;
     public float shortDis;
 
-    public static float[] ChampionAttachTimer = new float[4];
+    public static float[] ChampionAttachTimer = new float[NumberOfChampion];
+    public static float[] ItemAttachTimer = new float[NumberOfItem];
 
-    public static GameObject[] ChampionCards = new GameObject [4];
+    public static GameObject[] ChampionCards = new GameObject [NumberOfChampion];
+    public static GameObject[] ItemCards = new GameObject[NumberOfItem];
+
     public int Round; //게임 라운드
 
     
@@ -34,16 +40,20 @@ public class GameGE : MonoBehaviour
     {
         isGamePlaying = false;
         Round = 0; // 게임 라운드
-        for (int i = 0; i < 4; i++)
-            ChampionCards[i] = GameObject.Find("ChampionCard" + (i + 1).ToString());
+        for (int i = 0; i < NumberOfChampion; i++)
+            ChampionCards[i] = GameObject.Find("ChampionCard" + (i + 1).ToString()); 
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        for(int i=0; i< 4; i++)
+        for(int i=0; i < NumberOfChampion; i++)
             ChampionAttachTimer[i] = ChampionCards[i].GetComponent<ChampionCard>().attachTimer;
+        for (int i = 0; i < NumberOfItem; i++)
+            ItemAttachTimer[i] = ChampionCards[i].GetComponent<ChampionCard>().attachTimer;
+
 
         if (BlueBoard.GetComponent<Board>().PlayerHP <= 0)
         {

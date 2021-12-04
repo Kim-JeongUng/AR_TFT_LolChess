@@ -82,14 +82,13 @@ public class BoardCheckChampion : MonoBehaviour
             }
         }
     }
-    IEnumerator WaitForIt(int ChampionSlotNum) // 1초 뒤 탐색
+    IEnumerator WaitForIt(int ChampionSlotNum) // 1초 마다 재탐색
     {
         yield return new WaitForSeconds(1.0f);
         CardAttach(ChampionSlotNum);
     }
     public void CardAttach(int ChampionSlotNum)
     {
-        Debug.Log("AA");
         if (!ChampionSlot[ChampionSlotNum])  // 아이템이 안 차있으면
         {
             // 모든 챔피언 카드의 타이머를 확인
