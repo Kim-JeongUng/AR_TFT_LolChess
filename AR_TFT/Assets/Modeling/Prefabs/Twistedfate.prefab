@@ -8850,9 +8850,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ebca937dbacf34a828fd623d364501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
-  ATK: 50
-  MATK: 50
   attackSpeed: 0.6
   atk: 0
   ChampSkillTime: 5
@@ -8874,7 +8871,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 30
+  m_Radius: 40
   m_Height: 200
   m_Direction: 1
   m_Center: {x: 0, y: 80, z: 0}
