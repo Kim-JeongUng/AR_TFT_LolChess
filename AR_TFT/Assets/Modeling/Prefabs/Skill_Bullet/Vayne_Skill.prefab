@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 4873721902940059591}
   m_Layer: 0
   m_Name: Vayne_Skill
-  m_TagString: Untagged
+  m_TagString: Skill_Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

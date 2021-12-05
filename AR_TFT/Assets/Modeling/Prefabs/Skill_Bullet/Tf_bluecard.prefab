@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3079828713282992078}
   m_Layer: 0
   m_Name: Tf_bluecard
-  m_TagString: Untagged
+  m_TagString: Skill_Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
