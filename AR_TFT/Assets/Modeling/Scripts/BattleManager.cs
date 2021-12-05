@@ -25,6 +25,8 @@ public class BattleManager : MonoBehaviour
     public GameObject Bullet;
     public Transform bulletPos;
 
+    public GameObject skill_Bullet;
+
     Bullet bulletTarget;
 
 
@@ -58,6 +60,7 @@ public class BattleManager : MonoBehaviour
                 if (anim.GetCurrentAnimatorStateInfo(0).IsTag("skillanimation"))
                 {
                     skillEfect.Play();
+                    fireSkill(target);
 
                     anim.SetBool("Skill", false);
                     skillcount = 0;
@@ -88,6 +91,12 @@ public class BattleManager : MonoBehaviour
             anim.SetBool("Death", false); // 다시 살아남
             anim.SetBool("Attack", false);
         }
+    }
+    public void fireSkill(GameObject Target)
+    {
+        GameObject skill = Instantiate(skill_Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
+        bulletTarget = skill.GetComponent<Bullet>();
+        bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언으로 교체 필요함-----------------
     }
     public void firebullet(GameObject Target)
     {
