@@ -160,6 +160,11 @@ public class ChampionIdentity : MonoBehaviour
             Gametimer += Time.deltaTime;
             HPred.SetActive(true);
             HPblack.SetActive(true);
+
+            //라운드 시작시 각 아이템 확인
+            if (!this.GetComponent<ChampionCard>().MyItem[0] || !this.GetComponent<ChampionCard>().MyItem[0]) { }
+            else
+                GetCompleteItem(this.GetComponent<ChampionCard>().MyItem[0], this.GetComponent<ChampionCard>().MyItem[1]);
         }
 
         if (ChampHP <= 0 && GameGE.isGamePlaying)
@@ -168,7 +173,7 @@ public class ChampionIdentity : MonoBehaviour
             this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Death", true);
         }
 
-        if (isBeltTears || isSwordTears || isBowWand) // 구원 / 쇼진 / 구인수
+        if (isBeltTears || isSwordTears || isBowWand || isTearsWand) // 구원 / 쇼진 / 구인수 / 대천사
         {
             ItemTimer += Time.deltaTime;
             if (ItemTimer > 3.0f)
@@ -182,6 +187,8 @@ public class ChampionIdentity : MonoBehaviour
                         Team.ChampAD += 3;
                     else if (isBowWand)
                         Team.ChampAS += 0.05f;
+                    else if (isTearsWand)
+                        Team.ChampAP += 3;
                 }
             }
         }
