@@ -23,71 +23,64 @@ public class ChampionIdentity : MonoBehaviour
     public GameGE GameManager;
 
     public float Gametimer = 0;
-
-    float ItemTimer = 0.0f;
-
-    //아이템
-    bool isBeltTears = false;  //구원
-    bool isBeltWand = false;  //모렐로
-
     // Start is called before the first frame update
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameGE>();
         // 기본 스텍 정의
-        if (ChampName == "Vayne")
+        if (ChampName == "Vayne")//공속위주
         {
             ChampFullHP = 450;
             ChampHP = 450;
+            ChampAD = 50;
+            ChampAP = 50;
+            ChampAS = 1.1f;
+            ChampSkillTime = 5.0f;
+        }
+        if (ChampName == "Soraka")//탱위주
+        {
+            ChampFullHP = 600;
+            ChampHP = 600;
+            ChampAD = 50;
+            ChampAP = 50;
+            ChampAS = 0.5f;
+            ChampSkillTime = 3.0f;
+        }
+        if (ChampName == "Janna")//보호막스킬위주
+        {
+            ChampFullHP = 450;
+            ChampHP = 450;
+            ChampAD = 50;
+            ChampAP = 100;
+            ChampAS = 0.5f;
+            ChampSkillTime = 5.0f;
+        }
+        if (ChampName == "Caitlyn")//공격력위주
+        {
+            ChampFullHP = 450;
+            ChampHP = 450;
+            ChampAD = 80;
+            ChampAP = 50;
+            ChampAS = 0.7f;
+            ChampSkillTime = 5.0f;
+        }
+        if (ChampName == "Nidalee")//평타스킬 밸런스
+        {
+            ChampFullHP = 500;
+            ChampHP = 500;
             ChampAD = 70;
-            ChampAP = 0;
+            ChampAP = 50;
             ChampAS = 0.8f;
             ChampSkillTime = 5.0f;
         }
-        if (ChampName == "Soraka")
+        if (ChampName == "Twistedfate")//딜스킬 위주
         {
             ChampFullHP = 450;
             ChampHP = 450;
-            ChampAD = 70;
-            ChampAP = 0;
-            ChampAS = 0.8f;
-            ChampSkillTime = 5.0f;
-        }
-        if (ChampName == "Janna")
-        {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampAD = 70;
-            ChampAP = 0;
-            ChampAS = 0.8f;
-            ChampSkillTime = 5.0f;
-        }
-        if (ChampName == "Caitlyn")
-        {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampAD = 70;
-            ChampAP = 0;
-            ChampAS = 0.8f;
-            ChampSkillTime = 5.0f;
-        }
-        if (ChampName == "Nidalee")
-        {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampAD = 70;
-            ChampAP = 0;
-            ChampAS = 0.8f;
-            ChampSkillTime = 5.0f;
-        }
-        if (ChampName == "Twistedfate")
-        {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampAD = 70;
-            ChampAP = 0;
-            ChampAS = 0.8f;
-            ChampSkillTime = 5.0f;
+            ChampAD = 50;
+            ChampAP = 100;
+            ChampAS = 0.4f;
+            ChampSkillTime = 4.0f;
         }
     }
 
@@ -105,8 +98,6 @@ public class ChampionIdentity : MonoBehaviour
             ChampHP = ChampFullHP;
             HPred.SetActive(false);
             HPblack.SetActive(false);
-            isBeltTears = false;
-            ItemTimer = 0.0f;
         }
         else if (GameGE.isGamePlaying)
         {
@@ -119,31 +110,6 @@ public class ChampionIdentity : MonoBehaviour
         {
             this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Attack", false);
             this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Death", true);
-        }
-
-        if (isBeltTears) // 구원
-        {
-            ItemTimer += Time.deltaTime;
-            if (ItemTimer > 3.0f)
-            {
-                ItemTimer = 0.0f;
-                foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
-                {
-                    Team.ChampHP += 10;
-                }
-            }
-        }
-        if(isBeltWand) //모렐로
-        {
-            ItemTimer += Time.deltaTime;
-            if (ItemTimer > 3.0f)
-            {
-                ItemTimer = 0.0f;
-                foreach (ChampionIdentity enemy in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
-                {
-                    //Team.ChampHP -= 10;
-                }
-            }
         }
     }
 
@@ -173,8 +139,10 @@ public class ChampionIdentity : MonoBehaviour
         {
             ChampAP += 30;
         }
-        if (!this.GetComponent<ChampionCard>().MyItem[0] || !this.GetComponent<ChampionCard>().MyItem[0]) { }
+        if(!this.GetComponent<ChampionCard>().MyItem[0] || !this.GetComponent<ChampionCard>().MyItem[0])
+        {
 
+        }
         else
             GetCompleteItem(this.GetComponent<ChampionCard>().MyItem[0], this.GetComponent<ChampionCard>().MyItem[1]);
     }
@@ -214,13 +182,11 @@ public class ChampionIdentity : MonoBehaviour
                 Team.ChampAS += 0.1f;
             }
         }
-        else if (CompleteItem.name == "BeltTears") // 구원  3초마다 아군 체력 +10
+        else if (CompleteItem.name == "BeltTears") // 구원
         {
-            isBeltTears = true;
         }
-        else if (CompleteItem.name == "BeltWand") // 모렐 3초마다 상대 체력 -10
+        else if (CompleteItem.name == "BeltWand") // 모렐 - 치유, 보호막감소
         {
-            isBeltWand = true;
         }
         else if (CompleteItem.name == "BowBow") // 고연포 - 멀리서 때림
         {
@@ -234,8 +200,8 @@ public class ChampionIdentity : MonoBehaviour
         }
         else if (CompleteItem.name == "BowWand") // 구인수 - 공속 - 게임시간비례 더 늘어나게
         {
-            float tempAS = Gametimer / 3.0f;
-            ChampAS = 0.8f + tempAS * 0.05f; // 기본공속 + 
+            float temp = Gametimer % 3.0f;
+
         }
         else if (CompleteItem.name == "SwordSword") // 죽검 - 공격력 뻥튀기
         {
