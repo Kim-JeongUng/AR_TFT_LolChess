@@ -53,8 +53,8 @@ public class GameGE : MonoBehaviour
 
         for(int i=0; i < NumberOfChampion; i++)
             ChampionAttachTimer[i] = ChampionCards[i].GetComponent<ChampionCard>().attachTimer;
-        for (int i = 0; i < NumberOfItem; i++)
-            ItemAttachTimer[i] = ItemCards[i].GetComponent<ItemCard>().attachTimer;
+        /*for (int i = 0; i < NumberOfItem; i++)
+            ItemAttachTimer[i] = ItemCards[i].GetComponent<ItemCard>().attachTimer;*/
 
 
         if (BlueBoard.GetComponent<Board>().PlayerHP <= 0)  // 꼬물이 HP
