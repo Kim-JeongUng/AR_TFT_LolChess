@@ -27,7 +27,7 @@ public class GameGE : MonoBehaviour
     public static float[] ItemAttachTimer = new float[NumberOfItem];
 
     public static GameObject[] ChampionCards = new GameObject [NumberOfChampion];
-    public static GameObject[] ItemCards = new GameObject[NumberOfItem]; //아이템마커
+    public GameObject[] ItemCards = new GameObject[NumberOfItem]; //아이템마커
 
 
     public GameObject[] Items = new GameObject[NumberOfItem]; // 아이템 
@@ -45,9 +45,6 @@ public class GameGE : MonoBehaviour
         Round = 0; // 게임 라운드
         for (int i = 0; i < NumberOfChampion; i++)
             ChampionCards[i] = GameObject.Find("ChampionCard" + (i + 1).ToString());
-
-        for (int i = 0; i < NumberOfItem; i++)
-            ItemCards[i] = GameObject.Find("Item" + (i + 1).ToString());
     }
 
     // Update is called once per frame

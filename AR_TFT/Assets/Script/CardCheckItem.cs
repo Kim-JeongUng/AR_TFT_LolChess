@@ -117,7 +117,7 @@ public class CardCheckItem : MonoBehaviour
                 {
                     float tempTime = GameGE.ItemAttachTimer[i];
                     int tempIndex = i;
-                    if (!GameGE.ItemCards[tempIndex].transform.parent && GameGE.ItemCards[tempIndex].GetComponent<ItemCard>().isattach)
+                    if (!GameManager.GetComponent<GameGE>().ItemCards[tempIndex].transform.parent && GameManager.GetComponent<GameGE>().ItemCards[tempIndex].GetComponent<ItemCard>().isattach)
                     {
                         minTime = tempTime;
                         minIndex = i;
@@ -129,8 +129,9 @@ public class CardCheckItem : MonoBehaviour
                 Instantiate(GameManager.GetComponent<GameGE>().Items[minIndex], ItemSlotSpace[ItemSlotNum].transform.position, GameManager.GetComponent<GameGE>().Items[minIndex].transform.rotation, ItemSlotSpace[ItemSlotNum].transform);
                 //GameGE.ItemCards[minIndex].transform.parent = this.transform;
                 ItemSlot[ItemSlotNum] = true;
-                this.GetComponent<ChampionCard>().MyItem[ItemSlotNum] = GameGE.ItemCards[minIndex];
+                this.GetComponent<ChampionCard>().MyItem[ItemSlotNum] = GameManager.GetComponent<GameGE>().ItemCards[minIndex];
                 this.GetComponent<ChampionCard>().EqupItemCount++;
+                this.gameObject.GetComponent<ChampionIdentity>().GetNewItem(GameManager.GetComponent<GameGE>().ItemCards[minIndex]);
                 Debug.Log((minIndex + 1).ToString() + "아이템이 슬롯" + (ItemSlotNum + 1).ToString() + "칸에 장착");
             }
             else // 버튼은 클릭됐지만 위에 등록된 카드가 없음
