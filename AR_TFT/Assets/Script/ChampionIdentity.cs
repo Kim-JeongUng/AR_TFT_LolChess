@@ -10,13 +10,25 @@ public class ChampionIdentity : MonoBehaviour
     public GameObject CompleteItem; // 선택된 완성 아이템 
     public GameObject HPred, HPblack;
 
+    // HP를 제외하고는 모두 FULL값을 넘을 수 있음(조합 템 효과)
     public int ChampFullHP;//최대 체력
     public int ChampHP; // 체력
+
+    public int ChampFullAD; // 아이템까지 낀 총 합(조합템 영향 X)
     public int ChampAD; // 공격력
+
+    public int ChampFullAP;
     public int ChampAP; // 주문력
+
+    public float ChampFullAS;
     public float ChampAS; // 공격속도
+
+    public float ChampFullSkillTime;
     public float ChampSkillTime; // 스킬재사용대기시간
+
+    public float ChampFullSkillDamage; 
     public float ChampSkillDamage; // 스킬 데미지
+
 
     public float per;//체력 비율 계산용
 
@@ -29,6 +41,9 @@ public class ChampionIdentity : MonoBehaviour
     //아이템
     bool isBeltTears = false;  //구원
     bool isBeltWand = false;  //모렐로
+    bool isSwordTears = false; //쇼진
+    bool isBowWand = false; //구인수
+    bool isTearsWand = false; //대천사
 
     // Start is called before the first frame update
     void Start()
@@ -39,54 +54,78 @@ public class ChampionIdentity : MonoBehaviour
         {
             ChampFullHP = 450;
             ChampHP = 450;
+            ChampFullAD = 50;
             ChampAD = 50;
+            ChampFullAP = 50;
             ChampAP = 50;
+            ChampFullAS = 1.1f;
             ChampAS = 1.1f;
+            ChampFullSkillTime = 5.0f;
             ChampSkillTime = 5.0f;
         }
         if (ChampName == "Soraka")//탱위주
         {
             ChampFullHP = 600;
             ChampHP = 600;
+            ChampFullAD = 50;
             ChampAD = 50;
+            ChampFullAP = 50;
             ChampAP = 50;
+            ChampFullAS = 0.5f;
             ChampAS = 0.5f;
+            ChampFullSkillTime = 3.0f;
             ChampSkillTime = 3.0f;
         }
         if (ChampName == "Janna")//보호막스킬위주
         {
             ChampFullHP = 450;
             ChampHP = 450;
+            ChampFullAD = 50;
             ChampAD = 50;
+            ChampFullAP = 50;
             ChampAP = 100;
+            ChampFullAS = 0.5f;
             ChampAS = 0.5f;
+            ChampFullSkillTime = 5.0f;
             ChampSkillTime = 5.0f;
         }
         if (ChampName == "Caitlyn")//공격력위주
         {
             ChampFullHP = 450;
             ChampHP = 450;
+            ChampFullAD = 80;
             ChampAD = 80;
+            ChampFullAP = 50;
             ChampAP = 50;
+            ChampFullAS = 0.7f;
             ChampAS = 0.7f;
+            ChampFullSkillTime = 5.0f;
             ChampSkillTime = 5.0f;
         }
         if (ChampName == "Nidalee")//평타스킬 밸런스
         {
             ChampFullHP = 500;
             ChampHP = 500;
+            ChampFullAD = 70;
             ChampAD = 70;
+            ChampFullAP = 50;
             ChampAP = 50;
+            ChampFullAS = 0.8f;
             ChampAS = 0.8f;
+            ChampFullSkillTime = 5.0f;
             ChampSkillTime = 5.0f;
         }
         if (ChampName == "Twistedfate")//딜스킬 위주
         {
             ChampFullHP = 450;
             ChampHP = 450;
+            ChampFullAD = 50;
             ChampAD = 50;
+            ChampFullAP = 100;
             ChampAP = 100;
+            ChampFullAS = 0.4f;
             ChampAS = 0.4f;
+            ChampFullSkillTime = 4.0f;
             ChampSkillTime = 4.0f;
         }
     }
@@ -102,7 +141,15 @@ public class ChampionIdentity : MonoBehaviour
         if (!GameGE.isGamePlaying)
         {
             Gametimer = 0.0f;
+
+            //매 라운드마다 초기화
             ChampHP = ChampFullHP;
+            ChampAD = ChampFullAD;
+            ChampAP = ChampFullAP;
+            ChampAS = ChampFullAS;
+            ChampSkillTime = ChampFullSkillTime;
+            ChampSkillDamage = ChampFullSkillDamage;
+
             HPred.SetActive(false);
             HPblack.SetActive(false);
             isBeltTears = false;
@@ -121,7 +168,7 @@ public class ChampionIdentity : MonoBehaviour
             this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Death", true);
         }
 
-        if (isBeltTears) // 구원
+        if (isBeltTears || isSwordTears || isBowWand) // 구원 / 쇼진 / 구인수
         {
             ItemTimer += Time.deltaTime;
             if (ItemTimer > 3.0f)
@@ -129,7 +176,12 @@ public class ChampionIdentity : MonoBehaviour
                 ItemTimer = 0.0f;
                 foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
                 {
-                    Team.ChampHP += 10;
+                    if (isBeltTears)
+                        Team.ChampHP += 10;
+                    else if (isSwordTears)
+                        Team.ChampAD += 3;
+                    else if (isBowWand)
+                        Team.ChampAS += 0.05f;
                 }
             }
         }
@@ -158,19 +210,23 @@ public class ChampionIdentity : MonoBehaviour
             Debug.Log("AAB");
         }
         if (NewItem.name == "Bow")
-        {
+        { 
+            ChampFullAS += 0.1f;
             ChampAS += 0.1f;
         }
         if (NewItem.name == "Sword")
         {
+            ChampFullAD += 30;
             ChampAD += 30;
         }
         if (NewItem.name == "Tears")
         {
+            ChampFullSkillTime *= 0.8f;
             ChampSkillTime *= 0.8f;   // 스킬쿨타임 20퍼 감소
         }
         if (NewItem.name == "Wand")
         {
+            ChampFullAP += 30;
             ChampAP += 30;
         }
         if (!this.GetComponent<ChampionCard>().MyItem[0] || !this.GetComponent<ChampionCard>().MyItem[0]) { }
@@ -195,67 +251,74 @@ public class ChampionIdentity : MonoBehaviour
                 //삭제를 해야하나?
                 Destroy(this.GetComponent<CardCheckItem>().ItemSlotSpace[0]);
                 Destroy(this.GetComponent<CardCheckItem>().ItemSlotSpace[1]);
+
+                if (CompleteItem.name == "BeltBelt")  //워모그
+                {
+                    ChampFullHP += 200;
+                    ChampHP += 200;
+                    // 기능 구현 - 체력 + 200 (총 600)
+                }
+                else if (CompleteItem.name == "BeltBow") // 즈롯 - 기능구현 앞으로 10만큼 이동함 (어그로 받아줌)
+                {
+                    this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z + 100);
+                }
+                else if (CompleteItem.name == "BeltSword") // 지크 - 아군 전체 공격속도 0.1 빨라짐
+                {
+                    foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
+                    {
+                        Team.ChampAS += 0.1f;
+                    }
+                }
+                else if (CompleteItem.name == "BeltTears") // 구원  3초마다 아군 체력 +10
+                {
+                    isBeltTears = true;
+                }
+                else if (CompleteItem.name == "BeltWand") // 모렐 3초마다 상대 체력 -10
+                {
+                    isBeltWand = true;
+                }
+                else if (CompleteItem.name == "BowBow") // 고연포 - 멀리서 때림
+                {
+                    this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z - 100);
+                }
+                else if (CompleteItem.name == "BowSword") // 거학 - 체력비례
+                {
+                }
+                else if (CompleteItem.name == "BowTears") // 얼심 - 상대 공속 - 10
+                {
+                    foreach (ChampionIdentity Enemy in this.transform.parent.GetComponent<Board>().Enemy.GetComponent<Board>().GetComponentsInChildren<ChampionIdentity>())
+                    {
+                        Enemy.ChampAS -= 10;
+                    }
+                }
+                else if (CompleteItem.name == "BowWand") // 구인수 - 공속 - 게임시간비례 더 늘어나게
+                {
+                    isBowWand = true;
+                }
+                else if (CompleteItem.name == "SwordSword") // 죽검 - 공격력 뻥튀기
+                {
+                    ChampAD += 30;
+                }
+                else if (CompleteItem.name == "SwordTears") // 쇼진
+                {
+                    isSwordTears = true;
+                }
+                else if (CompleteItem.name == "SwordWand") // 총검
+                {
+                }
+                else if (CompleteItem.name == "TearsTears") //블루
+                {
+                }
+                else if (CompleteItem.name == "TearsWand") //대천사
+                {
+                    isTearsWand = true;
+                }
+                else if (CompleteItem.name == "WandWand") //
+                {
+                }
             }
         }
-        if (CompleteItem.name == "BeltBelt")  //워모그
-        {
-            ChampFullHP += 200;
-            ChampHP += 200;
-            // 기능 구현 - 체력 + 200 (총 600)
-        }
-        else if (CompleteItem.name == "BeltBow") // 즈롯 - 기능구현 앞으로 10만큼 이동함 (어그로 받아줌)
-        {
-            this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z + 100);
-        }
-        else if (CompleteItem.name == "BeltSword") // 지크 - 아군 전체 공격속도 0.1 빨라짐
-        {
-            foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
-            {
-                Team.ChampAS += 0.1f;
-            }
-        }
-        else if (CompleteItem.name == "BeltTears") // 구원  3초마다 아군 체력 +10
-        {
-            isBeltTears = true;
-        }
-        else if (CompleteItem.name == "BeltWand") // 모렐 3초마다 상대 체력 -10
-        {
-            isBeltWand = true;
-        }
-        else if (CompleteItem.name == "BowBow") // 고연포 - 멀리서 때림
-        {
-            this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z - 100);
-        }
-        else if (CompleteItem.name == "BowSword") // 거학 - 체력비례
-        {
-        }
-        else if (CompleteItem.name == "BowTears") // 스태틱
-        {
-        }
-        else if (CompleteItem.name == "BowWand") // 구인수 - 공속 - 게임시간비례 더 늘어나게
-        {
-            float tempAS = Gametimer / 3.0f;
-            ChampAS = 0.8f + tempAS * 0.05f; // 기본공속 + 
-        }
-        else if (CompleteItem.name == "SwordSword") // 죽검 - 공격력 뻥튀기
-        {
-            ChampAD += 30;
-        }
-        else if (CompleteItem.name == "SwordTears") // 
-        {
-        }
-        else if (CompleteItem.name == "SwordWand") //
-        {
-        }
-        else if (CompleteItem.name == "TearsTears") //
-        {
-        }
-        else if (CompleteItem.name == "TearsWand") //
-        {
-        }
-        else if (CompleteItem.name == "WandWand") //
-        {
-        }
+        
     }
 
     //테스트 미시도
