@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Champion
   - Item
+  - Skill_Bullet
   layers:
   - Default
   - TransparentFX
