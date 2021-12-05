@@ -35,59 +35,59 @@ public class ChampionIdentity : MonoBehaviour
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameGE>();
         // 기본 스텍 정의
-        if (ChampName == "Vayne")
+        if (ChampName == "Vayne")//공속위주
         {
             ChampFullHP = 450;
             ChampHP = 450;
+            ChampAD = 50;
+            ChampAP = 50;
+            ChampAS = 1.1f;
+            ChampSkillTime = 5.0f;
+        }
+        if (ChampName == "Soraka")//탱위주
+        {
+            ChampFullHP = 600;
+            ChampHP = 600;
+            ChampAD = 50;
+            ChampAP = 50;
+            ChampAS = 0.5f;
+            ChampSkillTime = 3.0f;
+        }
+        if (ChampName == "Janna")//보호막스킬위주
+        {
+            ChampFullHP = 450;
+            ChampHP = 450;
+            ChampAD = 50;
+            ChampAP = 100;
+            ChampAS = 0.5f;
+            ChampSkillTime = 5.0f;
+        }
+        if (ChampName == "Caitlyn")//공격력위주
+        {
+            ChampFullHP = 450;
+            ChampHP = 450;
+            ChampAD = 80;
+            ChampAP = 50;
+            ChampAS = 0.7f;
+            ChampSkillTime = 5.0f;
+        }
+        if (ChampName == "Nidalee")//평타스킬 밸런스
+        {
+            ChampFullHP = 500;
+            ChampHP = 500;
             ChampAD = 70;
-            ChampAP = 0;
+            ChampAP = 50;
             ChampAS = 0.8f;
             ChampSkillTime = 5.0f;
         }
-        if (ChampName == "Soraka")
+        if (ChampName == "Twistedfate")//딜스킬 위주
         {
             ChampFullHP = 450;
             ChampHP = 450;
-            ChampAD = 70;
-            ChampAP = 0;
-            ChampAS = 0.8f;
-            ChampSkillTime = 5.0f;
-        }
-        if (ChampName == "Janna")
-        {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampAD = 70;
-            ChampAP = 0;
-            ChampAS = 0.8f;
-            ChampSkillTime = 5.0f;
-        }
-        if (ChampName == "Caitlyn")
-        {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampAD = 70;
-            ChampAP = 0;
-            ChampAS = 0.8f;
-            ChampSkillTime = 5.0f;
-        }
-        if (ChampName == "Nidalee")
-        {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampAD = 70;
-            ChampAP = 0;
-            ChampAS = 0.8f;
-            ChampSkillTime = 5.0f;
-        }
-        if (ChampName == "Twistedfate")
-        {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampAD = 70;
-            ChampAP = 0;
-            ChampAS = 0.8f;
-            ChampSkillTime = 5.0f;
+            ChampAD = 50;
+            ChampAP = 100;
+            ChampAS = 0.4f;
+            ChampSkillTime = 4.0f;
         }
     }
 
