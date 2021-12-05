@@ -179,19 +179,23 @@ public class ChampionIdentity : MonoBehaviour
             if (ItemTimer > 3.0f)
             {
                 ItemTimer = 0.0f;
-                foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
+
+                if (isSwordTears)
+                    ChampAD += 3;
+                else if (isBowWand)
+                    ChampAS += 0.05f;
+                else if (isTearsWand)
+                    ChampAP += 3;
+                else if (isBeltTears)
                 {
-                    if (isBeltTears)
+                    foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
+                    {
                         Team.ChampHP += 10;
-                    else if (isSwordTears)
-                        Team.ChampAD += 3;
-                    else if (isBowWand)
-                        Team.ChampAS += 0.05f;
-                    else if (isTearsWand)
-                        Team.ChampAP += 3;
+                    }
                 }
             }
         }
+        
         if(isBeltWand) //모렐로
         {
             ItemTimer += Time.deltaTime;

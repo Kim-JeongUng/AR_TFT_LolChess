@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 8679409906377918920}
   m_Layer: 0
   m_Name: Nidalee_Skill
-  m_TagString: Untagged
+  m_TagString: Skill_Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
