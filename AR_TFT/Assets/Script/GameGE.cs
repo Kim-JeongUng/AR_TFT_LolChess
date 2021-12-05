@@ -31,6 +31,7 @@ public class GameGE : MonoBehaviour
 
 
     public GameObject[] Items = new GameObject[NumberOfItem]; // 아이템 
+    public GameObject[] CompleteItems = new GameObject[3]; //완성아이템
 
     public int Round; //게임 라운드
 

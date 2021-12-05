@@ -6,7 +6,6 @@ public class ChampionIdentity : MonoBehaviour
 {   // 각 챔피언에 붙어서 기본 체력, 아이템 부여체력, 스킬사용 에니메이션 담당
 
     public string ChampName;
-    public GameObject[] CompleteItems; // 완성 아이템 배열 <<입력필요>>
     public GameObject CompleteItemSpawn; //완성아이템 등장 위치 <<입력필요>>
     public GameObject CompleteItem; // 선택된 완성 아이템 
     public GameObject HPred, HPblack;
@@ -21,10 +20,12 @@ public class ChampionIdentity : MonoBehaviour
 
     public float per;//체력 비율 계산용
 
+    public GameGE GameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameManager = GameObject.Find("GameManager").GetComponent<GameGE>();
         // 기본 스텍 정의
         if (ChampName == "Vayne")
         {
@@ -132,17 +133,19 @@ public class ChampionIdentity : MonoBehaviour
         {
             ChampAP += 30;
         }
+        GetCompleteItem(this.GetComponent<ChampionCard>().MyItem[0], this.GetComponent<ChampionCard>().MyItem[1]);
     }
 
     //테스트 미시도
     public void GetCompleteItem(GameObject Item1, GameObject Item2) // 완성 아이템 관여
     {
-        foreach (GameObject PickItems in CompleteItems)
+        foreach (GameObject PickItems in GameManager.CompleteItems)
         {
             // 아이템 이름으로 완성아이템 검색 ex) Sword + Wand = SwordWand
             if (PickItems.name == Item1.name+Item2.name || PickItems.name == Item2.name + Item1.name) 
             {
                 CompleteItem = PickItems;
+                Debug.Log("PICK!" + CompleteItem.name);
             }
         }
         if (CompleteItem.name == "BeltBelt") 
@@ -159,13 +162,13 @@ public class ChampionIdentity : MonoBehaviour
         }
         else if (CompleteItem.name == "BeltSword")
         {
+            Instantiate(CompleteItem, CompleteItemSpawn.transform.position, Quaternion.identity);
+
+            //삭제를 해야하나?
+            Destroy(Item1);
+            Destroy(Item2);
             // 기능 구현  
         }
-        Instantiate(CompleteItem, CompleteItemSpawn.transform.position, Quaternion.identity);
-
-        //삭제를 해야하나?
-        Destroy(Item1);
-        Destroy(Item2);
     }
 
 
