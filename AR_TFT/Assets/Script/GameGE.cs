@@ -36,7 +36,7 @@ public class GameGE : MonoBehaviour
     public int Round; //게임 라운드
 
     public GameObject Red_win_text,Red_lose_text,Blue_win_text,Blue_lose_text;//승리여부 메세지
-    public GameObject GameOver_red,GameOver_blue;
+    public GameObject GameOver;
     public float time;
 
 
@@ -62,7 +62,8 @@ public class GameGE : MonoBehaviour
 
         if (BlueBoard.GetComponent<Board>().PlayerHP <= 0)  // 꼬물이 HP
         {
-            time+=Time.deltaTime;
+            GameOver.SetActive(true);
+            time +=Time.deltaTime;
             if(time < 2){
                 Red_win_text.SetActive(true);
                 Blue_lose_text.SetActive(true);//블루팀이 짐

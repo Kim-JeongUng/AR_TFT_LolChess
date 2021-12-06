@@ -102,7 +102,13 @@ public class BattleManager : MonoBehaviour
     {
         if (this.name == "Soraka" || this.name == "Janna")
         {
-            //소라카 잔나 스킬 구현
+            //소라카 잔나 체력회복 스킬 구현
+            if (this.name == "Soraka") //
+            {
+            }
+            if (this.name == "Janna") // 
+            {
+            }
         }
         else
         {
@@ -114,12 +120,7 @@ public class BattleManager : MonoBehaviour
             float SkillDamage = 0.0f;
             SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP * 2;
 
-            if (this.name == "Soraka") //
-            {
-            }
-            if (this.name == "Janna") // 
-            {
-            }
+            
             if (this.name == "Caitlyn") // 
             {
             }
@@ -154,6 +155,10 @@ public class BattleManager : MonoBehaviour
     IEnumerator Firebullet(GameObject Target)
     {
         GameObject a = Instantiate(Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
+        if(this.transform.parent.parent.GetComponent<ChampionIdentity>().isSwordWand) // 총검이면 공격력*0.2만큼 체력 회복
+        {
+            this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP += (int)(this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP * 0.2f);
+        }
         bulletTarget = a.GetComponent<Bullet>();
         bulletTarget.Target = Target.transform;
         float PlusDamage = 0.0f;

@@ -44,6 +44,8 @@ public class ChampionIdentity : MonoBehaviour
     bool isSwordTears = false; //쇼진
     bool isBowWand = false; //구인수
     bool isTearsWand = false; //대천사
+    public bool isSwordWand = false; //총검
+
 
     bool GameStartOnceCheck = true;
 
@@ -65,8 +67,8 @@ public class ChampionIdentity : MonoBehaviour
             ChampAP = 60;
             ChampFullAS = 0.658f;
             ChampAS = 0.658f;
-            ChampFullSkillTime = 12f;
-            ChampSkillTime = 12f;
+            ChampFullSkillTime = 8f;
+            ChampSkillTime = 8f;
         }
         if (ChampName == "Soraka")//탱위주
         {
@@ -102,8 +104,8 @@ public class ChampionIdentity : MonoBehaviour
             ChampAD = 62;
             ChampFullAP = 62;
             ChampAP = 62;
-            ChampFullAS = 0.625f;
-            ChampAS = 0.625f;
+            ChampFullAS = 0.525f;
+            ChampAS = 0.525f; 
             ChampFullSkillTime = 10f;
             ChampSkillTime = 10f;
         }
@@ -336,18 +338,19 @@ public class ChampionIdentity : MonoBehaviour
         {
             ChampAD += 30;
         }
-        else if (CompleteItem.name == "SwordTears") // 쇼진
+        else if (CompleteItem.name == "SwordTears") // 쇼진 - 3초마다 공격력 + 3
         {
             isSwordTears = true;
         }
-        else if (CompleteItem.name == "SwordWand") // 총검
+        else if (CompleteItem.name == "SwordWand") // 총검 - 쏠 때 마다 공격력 비례 체력회복
         {
+            isSwordWand = true;
         }
-        else if (CompleteItem.name == "TearsTears") //블루
+        else if (CompleteItem.name == "TearsTears") //블루 - 쿨타임 추가 20퍼 
         {
             ChampFullSkillTime *= 0.8f;
         }
-        else if (CompleteItem.name == "TearsWand") //대천사
+        else if (CompleteItem.name == "TearsWand") //대천사 - 3초마다 주문력 +3
         {
             isTearsWand = true;
         }
