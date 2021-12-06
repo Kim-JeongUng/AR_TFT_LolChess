@@ -45,6 +45,9 @@ public class BattleManager : MonoBehaviour
         if (this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP < 0)
             this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP = 0;
 
+        if (this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP > this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampFullHP)
+            this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampFullHP;
+
         if (anim.GetBool("Attack") == true)
         {
             skillcount = skillcount + Time.deltaTime;  //스킬 쿨타임
@@ -161,7 +164,7 @@ public class BattleManager : MonoBehaviour
         GameObject a = Instantiate(Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
         if(this.transform.parent.parent.GetComponent<ChampionIdentity>().isSwordWand) // 총검이면 공격력*0.2만큼 체력 회복
         {
-            this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP += (int)(this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP * 0.2f);
+            this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP += (int)(this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD * 0.2f);
         }
         bulletTarget = a.GetComponent<Bullet>();
         bulletTarget.Target = Target.transform;
