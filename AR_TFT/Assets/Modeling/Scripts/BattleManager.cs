@@ -47,7 +47,8 @@ public class BattleManager : MonoBehaviour
         {
             attackSpeed = 0.0001f; 
             stunTimer += Time.deltaTime;
-            if (stunTimer > 3.0f) //2초 스턴
+            Stun.Play();
+            if (stunTimer > 3.0f) //3초 스턴
             {
                 stunTimer = 0;
                 isTwistedfateSkillHit = false;
@@ -158,7 +159,6 @@ public class BattleManager : MonoBehaviour
             if (this.name == "Twistedfate") // 상대 스턴2초   데미지 : AP
             {
                 skill.GetComponent<Bullet>().isTwistedfateSkill = true;
-                Stun.Play();
                 SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP;
             }
 

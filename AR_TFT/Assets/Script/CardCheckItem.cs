@@ -106,7 +106,7 @@ public class CardCheckItem : MonoBehaviour
         {
             // 모든 챔피언 카드의 타이머를 확인
 
-            float minTime = 100.0f;
+            float minTime = 10.0f;
             int minIndex = 100;
 
             // 가장 최근에 인식된 카드 탐색

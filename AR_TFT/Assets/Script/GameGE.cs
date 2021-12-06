@@ -38,8 +38,8 @@ public class GameGE : MonoBehaviour
 
     public GameObject Red_win_text,Red_lose_text,Blue_win_text,Blue_lose_text;//승리여부 메세지
     public GameObject GameOver; // 게임오버
-    public float time;
 
+    public GameObject EmptyObject; //임시 게임 오브젝트
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +49,6 @@ public class GameGE : MonoBehaviour
         Round = 0; // 게임 라운드
         for (int i = 0; i < NumberOfChampion; i++)
             ChampionCards[i] = GameObject.Find("ChampionCard" + (i + 1).ToString());
-        time = 0;
     }
 
     // Update is called once per frame
@@ -69,38 +68,10 @@ public class GameGE : MonoBehaviour
             }
         }
 
-        if (BlueBoard.GetComponent<Board>().PlayerHP <= 0)  // 레드팀이 짐 1초 뒤부터 3초간 판넬 실행
-        {
-            GameOver.SetActive(true);
-            time +=Time.deltaTime;
-            if (time > 4 || time < 1)
-            {
-                Red_win_text.SetActive(false);
-                Blue_lose_text.SetActive(false);//블루팀이 짐
-            }
-            else if (time >= 1){
-                Red_win_text.SetActive(true);
-                Blue_lose_text.SetActive(true);//블루팀이 짐
-            }
-        }
-
-        else if (RedBoard.GetComponent<Board>().PlayerHP <= 0) // 레드팀이 짐 1초 뒤부터 3초간 판넬 실행
-        {
-            GameOver.SetActive(true);
-            time +=Time.deltaTime;
-            if (time > 4 || time < 1)
-            {
-                Red_lose_text.SetActive(false);
-                Blue_win_text.SetActive(false);
-            }
-            else if(time > 1){
-                Red_lose_text.SetActive(true);
-                Blue_win_text.SetActive(true);
-            }
-        }
+        
 
         // 보드에 챔피언들을 찾음
-        else if (BlueBoard.GetComponent<Board>().EqupChampionCount > 0 && RedBoard.GetComponent<Board>().EqupChampionCount > 0) // && RedBoard.GetComponent<Board>().EqupChampionCount == 3 
+        if (BlueBoard.GetComponent<Board>().EqupChampionCount > 0 && RedBoard.GetComponent<Board>().EqupChampionCount > 0) 
         { 
             if (!isGamePlaying)
             {
@@ -124,8 +95,18 @@ public class GameGE : MonoBehaviour
                     isGamePlaying = true;
                 }
             }
+            if (BlueBoard.GetComponent<Board>().PlayerHP <= 0 || RedBoard.GetComponent<Board>().PlayerHP <= 0)
+            {
+                GameOver.SetActive(true);
+            }
             else if (isGamePlaying)
             {
+                Red_lose_text.SetActive(false);
+                Red_win_text.SetActive(false);
+                Blue_lose_text.SetActive(false);
+                Blue_win_text.SetActive(false);
+
+
                 int SumBlueTeamHP = 0;
                 int SumRedTeamHP = 0;
                 foreach (ChampionIdentity BlueTeamHP in BlueBoard.GetComponentsInChildren<ChampionIdentity>()){
@@ -139,6 +120,9 @@ public class GameGE : MonoBehaviour
                 {
                     BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7;
                     isGamePlaying = false;
+
+                    Red_win_text.SetActive(true);
+                    Blue_lose_text.SetActive(true);//블루팀이 짐
                 }
                 foreach (ChampionIdentity RedTeamHP in RedBoard.GetComponentsInChildren<ChampionIdentity>())
                 {
@@ -152,6 +136,9 @@ public class GameGE : MonoBehaviour
                 {
                     RedBoard.GetComponent<Board>().PlayerHP -= Round * 7;
                     isGamePlaying = false;
+
+                    Red_lose_text.SetActive(true);
+                    Blue_win_text.SetActive(true);
                 }
                 for (int i = 0; i < 3; i++)  // 3 대신 현재 장착되어 있는 챔피언 수로 교체 필요******************************************************
                 {
@@ -206,6 +193,7 @@ public class GameGE : MonoBehaviour
             // 첫번째를 기준으로 잡아주기 
             shortDis = Vector3.Distance(gameObject.transform.position, FoundObjects[0].transform.position);  // 거리
 
+            enemy = EmptyObject;
             for (int i = 0; i < 3; i++)
             {
                 if (FoundObjects[i].name != "EmptyGameObject")
@@ -214,7 +202,6 @@ public class GameGE : MonoBehaviour
                     break;
                 }
             }
-
 
             foreach (GameObject found in FoundObjects)
             {

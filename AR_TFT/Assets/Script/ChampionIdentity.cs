@@ -165,6 +165,13 @@ public class ChampionIdentity : MonoBehaviour
             GameStartOnceCheck = true;
             sorakaSkill = false;
 
+            this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(0, 0, 0);
+            /*this.transform.GetChild(5).GetChild(0).localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+*/
+            this.transform.GetChild(5).GetChild(0).Rotate(new Vector3(0, 0, 0));
+
+
+
             if (CompleteItemSpawn.transform.childCount == 1)
                 CompleteItemSpawn.transform.GetChild(0).gameObject.SetActive(true);
         }
@@ -213,11 +220,15 @@ public class ChampionIdentity : MonoBehaviour
                 {
                     foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
                     {
-                        if (Team.ChampHP >= 0)
+                        if (this.ChampHP > 0)
                         {
-                            Team.ChampHP += 10;
-                            Team.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.startColor = Color.white;
-                            Team.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.Play();  // 구원 이팩트 재생
+                            if (Team.ChampHP > 0)
+                            {
+                                Team.ChampHP += 10;
+                                Team.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.startColor = Color.white;
+                                Team.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.Play();  // 구원 이팩트 재생
+                            }
+                            
                         }
                     }
                 }
@@ -225,11 +236,14 @@ public class ChampionIdentity : MonoBehaviour
                 {
                     foreach (ChampionIdentity Enemy in this.transform.parent.GetComponent<Board>().Enemy.GetComponent<Board>().GetComponentsInChildren<ChampionIdentity>())
                     {
-                        if (Enemy.ChampHP <= 0)
+                        if (this.ChampHP > 0)
                         {
-                            Enemy.ChampHP -= 10;
-                            Enemy.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.startColor = Color.black;
-                            Enemy.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.Play();
+                            if (Enemy.ChampHP > 0)
+                            {
+                                Enemy.ChampHP -= 10;
+                                Enemy.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.startColor = Color.black;
+                                Enemy.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.Play();
+                            }
                         }
                     }
                 }
