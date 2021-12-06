@@ -11,7 +11,6 @@ public class BattleManager : MonoBehaviour
     public float attackSpeed = 0.6f;  // 공격속도
     public float atk = 0;
 
-    public float ChampSkillTime = 5.0f; //스킬사용 대기시간
     public float skillcount = 0;
 
     public Animator anim;  // 공격 애니메이션
@@ -52,7 +51,7 @@ public class BattleManager : MonoBehaviour
         {
             skillcount = skillcount + Time.deltaTime;  //스킬 쿨타임
             // skillcool 감소에 따라 마나 게이지 UI 작동
-            if (skillcount >= ChampSkillTime)
+            if (skillcount >= this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampSkillTime)
             {
                 //StartCoroutine("skillanim", (1.0f));
                 // anim.SetBool("Attack", false); // Attack Stop
@@ -110,7 +109,8 @@ public class BattleManager : MonoBehaviour
             GameObject skill = Instantiate(skill_Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
             bulletTarget = skill.GetComponent<Bullet>();
             bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언
-            bulletTarget.damage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP*2 + this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD;  // 스킬 데미지
+            // 스킬 데미지
+            bulletTarget.damage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP*2;
         }
     }
     public void firebullet(GameObject Target)
