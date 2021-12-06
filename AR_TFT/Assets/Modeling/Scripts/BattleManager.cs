@@ -41,13 +41,10 @@ public class BattleManager : MonoBehaviour
         //attackSpeed = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAS;
         //ChampAD = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD;
         anim.SetFloat("attackSpeed", attackSpeed);  // 공격딜레이, 공격속도에 영향
+        
+        if (this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP < 0)
+            this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP = 0;
 
-        if (Input.GetKeyDown(KeyCode.A))  // 전투마커 인식 시 실행
-        {
-            anim.SetBool("Attack", true); // Attack Start
-            StartCoroutine(Firebullet(target));
-
-        }
         if (anim.GetBool("Attack") == true)
         {
             skillcount = skillcount + Time.deltaTime;  //스킬 쿨타임
@@ -62,7 +59,6 @@ public class BattleManager : MonoBehaviour
                 if (anim.GetCurrentAnimatorStateInfo(0).IsTag("skillanimation"))
                 {
                     skillEfect.Play();
-
 
                     fireSkill(target);
                     Debug.Log("Fire Skill~~~~~~~~~~~~~~~~~~~~~~");
@@ -85,6 +81,12 @@ public class BattleManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))  // 공격종료 조건 없음
         {
             anim.SetBool("Attack", false); // Attack Stop
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))  // 테스트 
+        {
+            anim.SetBool("Attack", true); // Attack Start
+            StartCoroutine(Firebullet(target));
         }
         //---------------------------------------------
 
@@ -119,12 +121,12 @@ public class BattleManager : MonoBehaviour
                                                      // 스킬 데미지
 
             float SkillDamage = 0.0f;
-           // SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP * 2;
 
-            
-            if (this.name == "Caitlyn") // AD + AP 깡데미지
+           // SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP * 2;
+            if (this.name == "Caitlyn") // 
             {
-                SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD * 2 + this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP;
+                SkillDamage = 2* this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD +this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP ;
+
             }
             if (this.name == "Vayne") // AD + 대상 최대체력 * 주문력 *0.01;
             {
