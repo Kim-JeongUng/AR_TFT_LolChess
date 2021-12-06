@@ -123,7 +123,7 @@ Transform:
   m_GameObject: {fileID: 3801319822443758970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 453.39035, y: 62.886284, z: 81.0516}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 6562709365548287461}
   - {fileID: 5284866147745588527}
@@ -162,6 +162,9 @@ MonoBehaviour:
   bulletrigid: {fileID: 3555562661471134882}
   turn: 10
   bulletVelocity: 300
+  damage: 0
+  skilldamage: 0
+  isTwistedfateSkill: 0
 --- !u!1 &7947222413124346902
 GameObject:
   m_ObjectHideFlags: 0
