@@ -166,9 +166,7 @@ public class ChampionIdentity : MonoBehaviour
             sorakaSkill = false;
 
             this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(0, 0, 0);
-            /*this.transform.GetChild(5).GetChild(0).localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-*/
-            this.transform.GetChild(5).GetChild(0).Rotate(new Vector3(0, 0, 0));
+            this.transform.GetChild(5).GetChild(0).localRotation = Quaternion.Euler(0, 0, 0);
 
 
 

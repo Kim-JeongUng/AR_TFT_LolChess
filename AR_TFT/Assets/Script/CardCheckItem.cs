@@ -106,7 +106,7 @@ public class CardCheckItem : MonoBehaviour
         {
             // 모든 챔피언 카드의 타이머를 확인
 
-            float minTime = 10.0f;
+            float minTime = 100.0f;
             int minIndex = 100;
 
             // 가장 최근에 인식된 카드 탐색
@@ -136,7 +136,6 @@ public class CardCheckItem : MonoBehaviour
             }
             else // 버튼은 클릭됐지만 위에 등록된 카드가 없음
             {
-                Debug.Log("등록된 카드가 올라가 있지 않습니다. 확인하세요.");
                 StartCoroutine(WaitForIt(ItemSlotNum));
             }
         }

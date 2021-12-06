@@ -22,8 +22,7 @@ public class ChampionCard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 추후 <자리를 찾는중> 이면으로 수정해야함
-        if (isattach == true && attachTimer<100)
+        if (isattach == true)
         {
             attachTimer += Time.deltaTime;
         }
