@@ -109,8 +109,8 @@ public class BattleManager : MonoBehaviour
         {
             GameObject skill = Instantiate(skill_Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
             bulletTarget = skill.GetComponent<Bullet>();
-            bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언으로 교체 필요함-----------------
-            bulletTarget.damage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD;
+            bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언
+            bulletTarget.damage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP*2 + this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD;  // 스킬 데미지
         }
     }
     public void firebullet(GameObject Target)
@@ -126,6 +126,7 @@ public class BattleManager : MonoBehaviour
         GameObject a = Instantiate(Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
         bulletTarget = a.GetComponent<Bullet>();
         bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언으로 교체 필요함-----------------
+        bulletTarget.damage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD;  // 평타 데미지
         atk = 0;
 
         yield return new WaitForSeconds((attackDelay / attackSpeed));
