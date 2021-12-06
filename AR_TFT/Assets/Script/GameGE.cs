@@ -35,7 +35,9 @@ public class GameGE : MonoBehaviour
 
     public int Round; //게임 라운드
 
-    
+    public GameObject Red_win_text,Red_lose_text,Blue_win_text,Blue_lose_text;//승리여부 메세지
+
+    public float time;
 
 
     // Start is called before the first frame update
@@ -45,12 +47,13 @@ public class GameGE : MonoBehaviour
         Round = 0; // 게임 라운드
         for (int i = 0; i < NumberOfChampion; i++)
             ChampionCards[i] = GameObject.Find("ChampionCard" + (i + 1).ToString());
+        time = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
         for(int i=0; i < NumberOfChampion; i++)
             ChampionAttachTimer[i] = ChampionCards[i].GetComponent<ChampionCard>().attachTimer;
         /*for (int i = 0; i < NumberOfItem; i++)
@@ -59,13 +62,31 @@ public class GameGE : MonoBehaviour
 
         if (BlueBoard.GetComponent<Board>().PlayerHP <= 0)  // 꼬물이 HP
         {
-            //블루팀이 짐
-            //GameOver(BlueBoard, RedBoard); //이긴팀, 진팀 다른 화면 출력
+            time+=Time.deltaTime;
+            if(time < 2){
+                Red_win_text.SetActive(true);
+                Blue_lose_text.SetActive(true);//블루팀이 짐
+                //GameOver(BlueBoard, RedBoard); //이긴팀, 진팀 다른 화면 출력
+            }
+            else{
+                Red_win_text.SetActive(false);
+                Blue_lose_text.SetActive(false);
+                time = 0f;
+            }
         }
 
         else if (RedBoard.GetComponent<Board>().PlayerHP <= 0)
         {
-            //레드팀이 짐
+            time+=Time.deltaTime;
+            if(time < 2){
+                Red_lose_text.SetActive(true);
+                Blue_lose_text.SetActive(true);//레드팀이 짐
+            }
+            else{
+                Red_lose_text.SetActive(false);
+                Blue_lose_text.SetActive(false);
+                time = 0f;
+            }
         }
 
         // 보드에 챔피언들을 찾음
