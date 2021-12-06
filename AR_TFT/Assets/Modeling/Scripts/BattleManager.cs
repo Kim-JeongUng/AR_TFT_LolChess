@@ -21,6 +21,7 @@ public class BattleManager : MonoBehaviour
 
     public ParticleSystem skillEfect;
     public ParticleSystem BeltTears;
+    public ParticleSystem Stun;
 
     public GameObject Bullet;
     public Transform bulletPos;
@@ -157,6 +158,7 @@ public class BattleManager : MonoBehaviour
             if (this.name == "Twistedfate") // 상대 스턴2초   데미지 : AP
             {
                 skill.GetComponent<Bullet>().isTwistedfateSkill = true;
+                Stun.Play();
                 SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP;
             }
 
