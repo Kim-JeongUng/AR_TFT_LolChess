@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameGE : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class GameGE : MonoBehaviour
     public int Round; //게임 라운드
 
     public GameObject Red_win_text,Red_lose_text,Blue_win_text,Blue_lose_text;//승리여부 메세지
-    public GameObject GameOver;
+    public GameObject GameOver; // 게임오버
     public float time;
 
 
@@ -59,34 +60,41 @@ public class GameGE : MonoBehaviour
         /*for (int i = 0; i < NumberOfItem; i++)
             ItemAttachTimer[i] = ItemCards[i].GetComponent<ItemCard>().attachTimer;*/
 
-
-        if (BlueBoard.GetComponent<Board>().PlayerHP <= 0)  // 꼬물이 HP
+        if (!GameOver.activeSelf)
         {
-            GameOver.SetActive(true);
-            time +=Time.deltaTime;
-            if(time < 2){
-                Red_win_text.SetActive(true);
-                Blue_lose_text.SetActive(true);//블루팀이 짐
-                //GameOver(BlueBoard, RedBoard); //이긴팀, 진팀 다른 화면 출력
-            }
-            else{
-                Red_win_text.SetActive(false);
-                Blue_lose_text.SetActive(false);
-                time = 0f;
+            if (GameCard) // 게임 시작 카드 확인
+            {
+                SceneManager.LoadScene("GameScene");
             }
         }
 
-        else if (RedBoard.GetComponent<Board>().PlayerHP <= 0)
+        if (BlueBoard.GetComponent<Board>().PlayerHP <= 0)  // 레드팀이 짐 1초 뒤부터 3초간 판넬 실행
         {
-            time+=Time.deltaTime;
-            if(time < 2){
-                Red_lose_text.SetActive(true);
-                Blue_lose_text.SetActive(true);//레드팀이 짐
+            GameOver.SetActive(true);
+            time +=Time.deltaTime;
+            if (time > 4 || time < 1)
+            {
+                Red_win_text.SetActive(false);
+                Blue_lose_text.SetActive(false);//블루팀이 짐
             }
-            else{
+            else if (time >= 1){
+                Red_win_text.SetActive(true);
+                Blue_lose_text.SetActive(true);//블루팀이 짐
+            }
+        }
+
+        else if (RedBoard.GetComponent<Board>().PlayerHP <= 0) // 레드팀이 짐 1초 뒤부터 3초간 판넬 실행
+        {
+            GameOver.SetActive(true);
+            time +=Time.deltaTime;
+            if (time > 4 || time < 1)
+            {
                 Red_lose_text.SetActive(false);
-                Blue_lose_text.SetActive(false);
-                time = 0f;
+                Blue_win_text.SetActive(false);
+            }
+            else if(time > 1){
+                Red_lose_text.SetActive(true);
+                Blue_win_text.SetActive(true);
             }
         }
 
@@ -110,9 +118,12 @@ public class GameGE : MonoBehaviour
 
                 if (!isGamePlaying && GameCard) // 게임 시작 카드 확인
                 {
-                    Round++; //라운드
                     Debug.Log("startCard Check!");
-                    isGamePlaying = true;
+                    if (!GameCard)
+                    {
+                        Round++; //라운드
+                        isGamePlaying = true;
+                    }
                 }
             }
             else if (isGamePlaying)
@@ -128,7 +139,6 @@ public class GameGE : MonoBehaviour
                 }
                 if(SumBlueTeamHP <= 0)
                 {
-                    Debug.Log("RedBoard Win RoundOver!!!!!!!!!!!!!!");
                     BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7;
                     isGamePlaying = false;
                 }
@@ -142,7 +152,6 @@ public class GameGE : MonoBehaviour
                 }
                 if (SumRedTeamHP <= 0)
                 {
-                    Debug.Log("BlueBoard Win RoundOver!!!!!!!!!!!!!!");
                     RedBoard.GetComponent<Board>().PlayerHP -= Round * 7;
                     isGamePlaying = false;
                 }
@@ -219,7 +228,6 @@ public class GameGE : MonoBehaviour
                 OurCard[index].transform.GetChild(5).GetChild(0).rotation = Quaternion.Slerp(OurCard[index].transform.GetChild(5).GetChild(0).rotation, lookOnLook, Time.deltaTime);
                 OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().target = enemy;
                 OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<Animator>().SetBool("Attack", true);
-                Debug.Log(enemy);
             }
             else
             {

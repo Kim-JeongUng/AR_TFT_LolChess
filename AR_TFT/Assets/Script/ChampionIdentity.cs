@@ -165,7 +165,7 @@ public class ChampionIdentity : MonoBehaviour
             isTwistedfateSkillHit = false;
 
             if (CompleteItemSpawn.transform.childCount == 1)
-                CompleteItemSpawn.transform.GetChild(0).gameObject.SetActive(false);
+                CompleteItemSpawn.transform.GetChild(0).gameObject.SetActive(true);
         }
         else if (GameGE.isGamePlaying)
         {
