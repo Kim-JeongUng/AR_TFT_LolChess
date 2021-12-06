@@ -126,6 +126,7 @@ public class BattleManager : MonoBehaviour
             //소라카 잔나 체력회복 스킬 구현
             if (this.name == "Soraka") //
             {
+                Soraka_Skill();
             }
             if (this.name == "Janna") // 
             {
@@ -166,6 +167,23 @@ public class BattleManager : MonoBehaviour
             bulletTarget.damage = (int)SkillDamage;
         }
     }
+    public void Soraka_Skill()
+    {
+            foreach (ChampionIdentity Team in this.transform.parent.parent.GetComponentsInChildren<ChampionIdentity>())
+            {
+                if (this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP > 0)
+                {
+                    if (Team.ChampHP > 0)
+                    {
+                        Team.ChampHP += this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP;
+                        Team.transform.GetComponent<BattleManager>().BeltTears.startColor = Color.white;
+                        Team.transform.GetComponent<BattleManager>().BeltTears.Play();  // 스킬 이펙트
+                    }
+                }
+            }
+    }
+    
+
     public void firebullet(GameObject Target)
     {
         atk = atk + Time.deltaTime;
