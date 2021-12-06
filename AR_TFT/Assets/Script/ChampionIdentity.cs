@@ -52,6 +52,8 @@ public class ChampionIdentity : MonoBehaviour
     float stunTimer = 0.0f;
 
     public bool isTwistedfateSkillHit = false;
+    public bool sorakaSkill = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -163,6 +165,7 @@ public class ChampionIdentity : MonoBehaviour
             ItemTimer = 0.0f;
             GameStartOnceCheck = true;
             isTwistedfateSkillHit = false;
+            sorakaSkill = false;
 
             if (CompleteItemSpawn.transform.childCount == 1)
                 CompleteItemSpawn.transform.GetChild(0).gameObject.SetActive(false);
@@ -192,6 +195,10 @@ public class ChampionIdentity : MonoBehaviour
                     isTwistedfateSkillHit = false;
                     this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Attack", true);
                 }
+            }
+            if(sorakaSkill && ChampHP > 0)
+            {
+                // 전체힐------------------------------------
             }
 
         }

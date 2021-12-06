@@ -20,6 +20,7 @@ public class BattleManager : MonoBehaviour
     public float skillDelay = 1.25f;  // 스킬 애니메이션 딜레이 ********* 챔피언마다 값 교체 필요함
 
     public ParticleSystem skillEfect;
+    public ParticleSystem BeltTears;
 
     public GameObject Bullet;
     public Transform bulletPos;
@@ -118,11 +119,12 @@ public class BattleManager : MonoBehaviour
                                                      // 스킬 데미지
 
             float SkillDamage = 0.0f;
-            SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP * 2;
+           // SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP * 2;
 
             
-            if (this.name == "Caitlyn") // 
+            if (this.name == "Caitlyn") // AD + AP 깡데미지
             {
+                SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD * 2 + this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP;
             }
             if (this.name == "Vayne") // AD + 대상 최대체력 * 주문력 *0.01;
             {
