@@ -227,6 +227,7 @@ public class ChampionIdentity : MonoBehaviour
                     foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
                     {
                         Team.ChampHP += 10;
+                        this.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.Play();  // 구원 이팩트 재생
                         //Team.GetComponent<effect>heal
                     }
                 }
