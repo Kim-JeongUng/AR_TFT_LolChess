@@ -11,7 +11,9 @@ public class Bullet : MonoBehaviour
 
     public int damage = 0;
     public int skilldamage = 0;
-    
+
+    public bool isTwistedfateSkill = false;
+
     public void FixedUpdate() // 유도탄
     {
         bulletrigid.velocity = transform.forward * bulletVelocity;
@@ -22,6 +24,10 @@ public class Bullet : MonoBehaviour
     {
         if (other.tag == "Champion")  // 캐릭터에 태그를 달아놨는데 이거를 블루/레드 상대편 챔피언이면 으로 바꿔야 할듯********************
         {
+            if (isTwistedfateSkill && other.GetComponent<Animator>().GetBool("Attack"))
+            {
+                other.GetComponent<ChampionIdentity>().isTwistedfateSkillHit = true;
+            }
             Debug.Log("Bullet Trigger Champion");
             other.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP -= damage;  //발사하는 캐릭터의 공격력 만큼 감소
             // 스킬 => 발사하는 캐릭터의 ap계수만큼 맞은적 hp감소

@@ -47,6 +47,9 @@ public class ChampionIdentity : MonoBehaviour
 
     bool GameStartOnceCheck = true;
 
+    float stunTimer = 0.0f;
+
+    public bool isTwistedfateSkillHit = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -117,7 +120,7 @@ public class ChampionIdentity : MonoBehaviour
             ChampFullSkillTime = 6f;
             ChampSkillTime = 6f;
         }
-        if (ChampName == "Twistedfate")//딜스킬 위주
+        if (ChampName == "Twistedfate")//딜스킬 위주 / 스킬 상대 스턴 2초
         {
             ChampFullHP = 534;
             ChampHP = 534;
@@ -127,8 +130,8 @@ public class ChampionIdentity : MonoBehaviour
             ChampAP = 52;
             ChampFullAS = 0.651f;
             ChampAS = 0.651f;
-            ChampFullSkillTime = 6f;
-            ChampSkillTime = 6f;
+            ChampFullSkillTime = 12f;
+            ChampSkillTime = 12f;
         }
     }
 
@@ -157,6 +160,7 @@ public class ChampionIdentity : MonoBehaviour
             isBeltTears = false;
             ItemTimer = 0.0f;
             GameStartOnceCheck = true;
+            isTwistedfateSkillHit = false;
 
             if (CompleteItemSpawn.transform.childCount == 1)
                 CompleteItemSpawn.transform.GetChild(0).gameObject.SetActive(false);
@@ -176,7 +180,18 @@ public class ChampionIdentity : MonoBehaviour
             Gametimer += Time.deltaTime;
             //라운드 시작시 각 아이템 확인
 
-            
+            if (isTwistedfateSkillHit && ChampHP > 0) // 트페 스킬 스턴 2초간
+            {
+                this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Attack", false);
+                stunTimer += Time.deltaTime;
+                if (stunTimer > 2.0f)
+                {
+                    stunTimer = 0;
+                    isTwistedfateSkillHit = false;
+                    this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Attack", true);
+                }
+            }
+
         }
 
         if (ChampHP <= 0 && GameGE.isGamePlaying)
@@ -203,6 +218,7 @@ public class ChampionIdentity : MonoBehaviour
                     foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
                     {
                         Team.ChampHP += 10;
+                        //Team.GetComponent<effect>heal
                     }
                 }
             }
@@ -301,21 +317,22 @@ public class ChampionIdentity : MonoBehaviour
         {
             this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z - 100);
         }
-        else if (CompleteItem.name == "BowSword") // 거학 - 체력비례
+        else if (CompleteItem.name == "BowSword") // 거학 - 상대 체력 3% 만큼 추가 데미지
         {
+            this.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().isBowSword = true;
         }
-        else if (CompleteItem.name == "BowTears") // 얼심 - 상대 공속 - 10
+        else if (CompleteItem.name == "BowTears") // 얼심 - 상대 공속 - 0.1
         {
             foreach (ChampionIdentity Enemy in this.transform.parent.GetComponent<Board>().Enemy.GetComponent<Board>().GetComponentsInChildren<ChampionIdentity>())
             {
-                Enemy.ChampAS -= 10;
+                Enemy.ChampAS -= 0.1f;
             }
         }
         else if (CompleteItem.name == "BowWand") // 구인수 - 공속 - 게임시간비례 더 늘어나게
         {
             isBowWand = true;
         }
-        else if (CompleteItem.name == "SwordSword") // 죽검 - 공격력 뻥튀기
+        else if (CompleteItem.name == "SwordSword") // 죽검 - 공격력 추가증가
         {
             ChampAD += 30;
         }
@@ -328,39 +345,17 @@ public class ChampionIdentity : MonoBehaviour
         }
         else if (CompleteItem.name == "TearsTears") //블루
         {
+            ChampFullSkillTime *= 0.8f;
         }
         else if (CompleteItem.name == "TearsWand") //대천사
         {
             isTearsWand = true;
         }
-        else if (CompleteItem.name == "WandWand") //
+        else if (CompleteItem.name == "WandWand") //라바돈 - 주문력 추가증가
         {
+            ChampAP += 30;
         }
         
     }
 
-    //테스트 미시도
-    public void UseSkill()
-    {
-        //ChampName.GetComponent<Animation>().Play("Skill");
-        if (ChampName == "Caitlyn")
-        {
-            ChampSkillDamage = (ChampAP * 3) + (ChampAD * 0.8f);
-            // 가장 먼 적에게 거리비례 데미지 궁극기
-        }
-        if (ChampName == "Vayne")
-        {
-            // 3대 마다 대상 체력 ?퍼 추가피해
-        }
-        if (ChampName == "Soraka")
-        {
-            // 아군 전체 체력 회복
-        }
-        if (ChampName == "Janna")
-        {
-            // 피해가 가장 심한 챔프 3초간 큰 보호막 제공
-        }
-
-
-    }
 }

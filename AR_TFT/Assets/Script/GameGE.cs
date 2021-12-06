@@ -37,7 +37,7 @@ public class GameGE : MonoBehaviour
 
     public GameObject Red_win_text,Red_lose_text,Blue_win_text,Blue_lose_text;//승리여부 메세지
 
-    public float time;
+    public static float time;
 
 
     // Start is called before the first frame update
@@ -119,9 +119,13 @@ public class GameGE : MonoBehaviour
                 int SumBlueTeamHP = 0;
                 int SumRedTeamHP = 0;
                 foreach (ChampionIdentity BlueTeamHP in BlueBoard.GetComponentsInChildren<ChampionIdentity>()){
+                    if(BlueTeamHP.ChampHP <= 0)
+                    {
+                        BlueTeamHP.ChampHP = 0;
+                    }
                     SumBlueTeamHP+= BlueTeamHP.ChampHP;
                 }
-                if(SumBlueTeamHP == 0)
+                if(SumBlueTeamHP <= 0)
                 {
                     Debug.Log("RedBoard Win RoundOver!!!!!!!!!!!!!!");
                     BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7;
@@ -129,9 +133,13 @@ public class GameGE : MonoBehaviour
                 }
                 foreach (ChampionIdentity RedTeamHP in RedBoard.GetComponentsInChildren<ChampionIdentity>())
                 {
+                    if (RedTeamHP.ChampHP <= 0)
+                    {
+                        RedTeamHP.ChampHP = 0;
+                    }
                     SumRedTeamHP += RedTeamHP.ChampHP;
                 }
-                if (SumRedTeamHP == 0)
+                if (SumRedTeamHP <= 0)
                 {
                     Debug.Log("BlueBoard Win RoundOver!!!!!!!!!!!!!!");
                     RedBoard.GetComponent<Board>().PlayerHP -= Round * 7;

@@ -28,7 +28,7 @@ public class BattleManager : MonoBehaviour
 
     Bullet bulletTarget;
 
-
+    public bool isBowSword =false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -109,8 +109,38 @@ public class BattleManager : MonoBehaviour
             GameObject skill = Instantiate(skill_Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
             bulletTarget = skill.GetComponent<Bullet>();
             bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언
-            // 스킬 데미지
-            bulletTarget.damage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP*2;
+                                                     // 스킬 데미지
+
+            float SkillDamage = 0.0f;
+            SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP * 2;
+
+            if (this.name == "Soraka") //
+            {
+            }
+            if (this.name == "Janna") // 
+            {
+            }
+            if (this.name == "Caitlyn") // 
+            {
+            }
+            if (this.name == "Vayne") // AD + 대상 최대체력 * 주문력 *0.01;
+            {
+                SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD*1.5f;
+                SkillDamage += Target.transform.parent.parent.GetComponent<ChampionIdentity>().ChampFullHP * this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP*0.001f; // 타겟 최대 체력의 10%
+            }
+            if (this.name == "Nidalee") // 거리 * AP *0.01
+            {
+                float dis = Vector3.Distance(this.transform.position, Target.transform.position);
+                SkillDamage = dis * this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP * 0.01f;
+            }
+            if (this.name == "Twistedfate") // 상대 스턴2초   데미지 : AP
+            {
+                skill.GetComponent<Bullet>().isTwistedfateSkill = true;
+                SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP;
+            }
+
+
+            bulletTarget.damage = (int)SkillDamage;
         }
     }
     public void firebullet(GameObject Target)
@@ -125,8 +155,13 @@ public class BattleManager : MonoBehaviour
     {
         GameObject a = Instantiate(Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
         bulletTarget = a.GetComponent<Bullet>();
-        bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언으로 교체 필요함-----------------
-        bulletTarget.damage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD;  // 평타 데미지
+        bulletTarget.Target = Target.transform;
+        float PlusDamage = 0.0f;
+        if (isBowSword)
+        {
+            PlusDamage = Target.transform.parent.parent.GetComponent<ChampionIdentity>().ChampFullHP * 0.03f; // 타겟 최대 체력의 3%
+        }
+        bulletTarget.damage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD+(int)PlusDamage;  // 평타 데미지
         atk = 0;
 
         yield return new WaitForSeconds((attackDelay / attackSpeed));
