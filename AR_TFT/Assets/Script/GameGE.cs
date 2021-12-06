@@ -44,6 +44,7 @@ public class GameGE : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameOver.SetActive(false);
         isGamePlaying = false;
         Round = 0; // 게임 라운드
         for (int i = 0; i < NumberOfChampion; i++)
@@ -60,7 +61,7 @@ public class GameGE : MonoBehaviour
         /*for (int i = 0; i < NumberOfItem; i++)
             ItemAttachTimer[i] = ItemCards[i].GetComponent<ItemCard>().attachTimer;*/
 
-        if (!GameOver.activeSelf)
+        if (GameOver.activeSelf)
         {
             if (GameCard) // 게임 시작 카드 확인
             {
@@ -119,11 +120,8 @@ public class GameGE : MonoBehaviour
                 if (!isGamePlaying && GameCard) // 게임 시작 카드 확인
                 {
                     Debug.Log("startCard Check!");
-                    if (!GameCard)
-                    {
-                        Round++; //라운드
-                        isGamePlaying = true;
-                    }
+                    Round++; //라운드  
+                    isGamePlaying = true;
                 }
             }
             else if (isGamePlaying)
@@ -207,34 +205,41 @@ public class GameGE : MonoBehaviour
 
             // 첫번째를 기준으로 잡아주기 
             shortDis = Vector3.Distance(gameObject.transform.position, FoundObjects[0].transform.position);  // 거리
-            enemy = FoundObjects[0];    // 적 GameObject
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (FoundObjects[i].name != "EmptyGameObject")
+                {
+                    enemy = FoundObjects[i].transform.GetChild(5).GetChild(0).gameObject;    // 적 GameObject 초기값
+                    break;
+                }
+            }
+
 
             foreach (GameObject found in FoundObjects)
             {
                 // 상대가 체력이 있는지 확인
                 if (found.name != "EmptyGameObject" && found.GetComponent<ChampionIdentity>().ChampHP > 0)
                 {
-                    float Distance = Vector3.Distance(OurCard[index].transform.position, found.transform.position);
+                    float Distance = Vector3.Distance(OurCard[index].transform.position, found.transform.GetChild(5).GetChild(0).position);
                     if (Distance < shortDis)
                     {
-                        enemy = found;
+                        enemy = found.gameObject;
                         shortDis = Distance;
                     }
                 }
             }
-            if (enemy.name != "EmptyGameObject" && enemy.GetComponent<ChampionIdentity>().ChampHP > 0)
+            if (enemy && enemy.name != "EmptyGameObject" && enemy.GetComponent<ChampionIdentity>().ChampHP > 0)
             {
                 Quaternion lookOnLook = Quaternion.LookRotation(enemy.transform.GetChild(5).GetChild(0).position - OurCard[index].transform.GetChild(5).GetChild(0).position);
                 OurCard[index].transform.GetChild(5).GetChild(0).rotation = Quaternion.Slerp(OurCard[index].transform.GetChild(5).GetChild(0).rotation, lookOnLook, Time.deltaTime);
-                OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().target = enemy;
+                OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().target = enemy.transform.GetChild(5).GetChild(0).gameObject;
                 OurCard[index].transform.GetChild(5).GetChild(0).GetComponent<Animator>().SetBool("Attack", true);
             }
             else
             {
                 Debug.Log(MyBoard+"Win");
             }
-            // 평타
-            //Debug.Log(shortDis);
         }
     }
     public void GameStartCard()

@@ -51,7 +51,6 @@ public class ChampionIdentity : MonoBehaviour
 
     float stunTimer = 0.0f;
 
-    public bool isTwistedfateSkillHit = false;
     public bool sorakaSkill = false;
 
     // Start is called before the first frame update
@@ -164,7 +163,6 @@ public class ChampionIdentity : MonoBehaviour
             isBeltTears = false;
             ItemTimer = 0.0f;
             GameStartOnceCheck = true;
-            isTwistedfateSkillHit = false;
             sorakaSkill = false;
 
             if (CompleteItemSpawn.transform.childCount == 1)
@@ -185,17 +183,6 @@ public class ChampionIdentity : MonoBehaviour
             Gametimer += Time.deltaTime;
             //라운드 시작시 각 아이템 확인
 
-            if (isTwistedfateSkillHit && ChampHP > 0) // 트페 스킬 스턴 2초간
-            {
-                this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Attack", false);
-                stunTimer += Time.deltaTime;
-                if (stunTimer > 2.0f)
-                {
-                    stunTimer = 0;
-                    isTwistedfateSkillHit = false;
-                    this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Attack", true);
-                }
-            }
             if(sorakaSkill && ChampHP > 0)
             {
                 // 전체힐------------------------------------
@@ -297,10 +284,10 @@ public class ChampionIdentity : MonoBehaviour
         this.GetComponent<CardCheckItem>().ItemSlotSpace[0].transform.GetChild(0).gameObject.SetActive(false);
         this.GetComponent<CardCheckItem>().ItemSlotSpace[1].transform.GetChild(0).gameObject.SetActive(false);
 
-        if (CompleteItem.name == "BeltBelt")  //워모그
+        if (CompleteItem.name == "BeltBelt")  //워모그 - 매 라운드 체력 + 50씩 증가
         {
-            ChampFullHP += 200;
-            ChampHP += 200;
+            ChampFullHP += 50;
+            ChampHP += 50;
         }
         else if (CompleteItem.name == "BeltBow") // 즈롯 - 기능구현 앞으로 10만큼 이동함 (어그로 받아줌)
         {
@@ -313,6 +300,8 @@ public class ChampionIdentity : MonoBehaviour
                 Team.ChampAS += 0.1f;
             }
         }
+        //구원 죽은애는 ㄴㄴ 하게 구원 에니메이션 팀 전부 / 캔버스 끝나고 안뜸 / 베인 일반공격 이상 / 트페 이상함 / 베인 레이저 ??
+        // 
         else if (CompleteItem.name == "BeltTears") // 구원  3초마다 아군 체력 +10
         {
             isBeltTears = true;

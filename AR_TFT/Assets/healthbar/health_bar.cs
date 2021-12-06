@@ -8,7 +8,6 @@ public class health_bar : MonoBehaviour
     public float full_health = 300;//풀 체력이 300이라면
     public float now_health = 150;//현재 체력
     public float per;//비율 계산용
-    int cnt = 0;
     // Start is called before the first frame update
     void Start()
     {

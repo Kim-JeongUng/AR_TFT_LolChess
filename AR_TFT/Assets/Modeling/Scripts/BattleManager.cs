@@ -30,6 +30,10 @@ public class BattleManager : MonoBehaviour
     Bullet bulletTarget;
 
     public bool isBowSword =false;
+
+    public bool isTwistedfateSkillHit = false;
+    float stunTimer = 0.0f;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -38,8 +42,18 @@ public class BattleManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //attackSpeed = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAS;
-        //ChampAD = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD;
+        if (isTwistedfateSkillHit)
+        {
+            attackSpeed = 0.0001f; 
+            stunTimer += Time.deltaTime;
+            if (stunTimer > 3.0f) //2초 스턴
+            {
+                stunTimer = 0;
+                isTwistedfateSkillHit = false;
+            }
+        }
+        else
+            attackSpeed = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAS;
         anim.SetFloat("attackSpeed", attackSpeed);  // 공격딜레이, 공격속도에 영향
         
         if (this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP < 0)
@@ -64,7 +78,6 @@ public class BattleManager : MonoBehaviour
                     skillEfect.Play();
 
                     fireSkill(target);
-                    Debug.Log("Fire Skill~~~~~~~~~~~~~~~~~~~~~~");
                     anim.SetBool("Skill", false);
                     skillcount = 0;
 
