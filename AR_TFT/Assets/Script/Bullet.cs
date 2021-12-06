@@ -34,6 +34,12 @@ public class Bullet : MonoBehaviour
         }
 
         Destroy(gameObject,3.0f);  // 총알 삭제
+
+        if (other.CompareTag("Shield")) // 쉴드 삭제
+        {
+            other.gameObject.SetActive(false);
+            Destroy(gameObject);  // 총알 삭제
+        }
     }
     // Start is called before the first frame update
     void Start()

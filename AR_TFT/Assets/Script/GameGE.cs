@@ -54,7 +54,10 @@ public class GameGE : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Test");
+        }
         for(int i=0; i < NumberOfChampion; i++)
             ChampionAttachTimer[i] = ChampionCards[i].GetComponent<ChampionCard>().attachTimer;
         /*for (int i = 0; i < NumberOfItem; i++)
@@ -64,7 +67,7 @@ public class GameGE : MonoBehaviour
         {
             if (GameCard) // 게임 시작 카드 확인
             {
-                SceneManager.LoadScene("GameScene");
+                SceneManager.LoadScene("Test");
             }
         }
 

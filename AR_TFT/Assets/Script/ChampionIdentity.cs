@@ -62,10 +62,10 @@ public class ChampionIdentity : MonoBehaviour
         {
             ChampFullHP = 515;
             ChampHP = 515;
-            ChampFullAD = 60;
-            ChampAD = 60;
-            ChampFullAP = 60;
-            ChampAP = 60;
+            ChampFullAD = 55;
+            ChampAD = 55;
+            ChampFullAP = 55;
+            ChampAP = 55;
             ChampFullAS = 0.658f;
             ChampAS = 0.658f;
             ChampFullSkillTime = 8f;
@@ -81,8 +81,8 @@ public class ChampionIdentity : MonoBehaviour
             ChampAP = 50;
             ChampFullAS = 0.625f;
             ChampAS = 0.625f;
-            ChampFullSkillTime = 6f;
-            ChampSkillTime = 6f;
+            ChampFullSkillTime = 10f;
+            ChampSkillTime = 10f;
         }
         if (ChampName == "Janna")//보호막스킬위주
         {
@@ -94,8 +94,8 @@ public class ChampionIdentity : MonoBehaviour
             ChampAP = 52;
             ChampFullAS = 0.625f;
             ChampAS = 0.625f;
-            ChampFullSkillTime = 10f;
-            ChampSkillTime = 10f;
+            ChampFullSkillTime = 7f;
+            ChampSkillTime = 7f;
         }
         if (ChampName == "Caitlyn")//공격력위주
         {
@@ -105,10 +105,10 @@ public class ChampionIdentity : MonoBehaviour
             ChampAD = 62;
             ChampFullAP = 62;
             ChampAP = 62;
-            ChampFullAS = 0.525f;
-            ChampAS = 0.525f; 
-            ChampFullSkillTime = 10f;
-            ChampSkillTime = 10f;
+            ChampFullAS = 0.605f;
+            ChampAS = 0.620f; 
+            ChampFullSkillTime = 9f;
+            ChampSkillTime = 9f;
         }
         if (ChampName == "Nidalee")//평타스킬 밸런스
         {
@@ -127,14 +127,14 @@ public class ChampionIdentity : MonoBehaviour
         {
             ChampFullHP = 534;
             ChampHP = 534;
-            ChampFullAD = 52;
-            ChampAD = 52;
+            ChampFullAD = 60;
+            ChampAD = 60;
             ChampFullAP = 52;
             ChampAP = 52;
             ChampFullAS = 0.651f;
             ChampAS = 0.651f;
-            ChampFullSkillTime = 12f;
-            ChampSkillTime = 12f;
+            ChampFullSkillTime = 10f;
+            ChampSkillTime = 10f;
         }
     }
 
@@ -146,7 +146,7 @@ public class ChampionIdentity : MonoBehaviour
         HPred.transform.localScale = new Vector3(13, 50 * per, 13);
         HPblack.transform.localPosition = new Vector3((50 * per), 150, 0);
         HPblack.transform.localScale = new Vector3(13, -50 + (50 * per), 13);
-        if (!GameGE.isGamePlaying)
+        if (!GameGE.isGamePlaying) // 라운드 끝
         {
             Gametimer = 0.0f;
 
@@ -165,11 +165,11 @@ public class ChampionIdentity : MonoBehaviour
             GameStartOnceCheck = true;
             sorakaSkill = false;
 
+            this.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().skillcount = 0;
             this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(0, 0, 0);
             this.transform.GetChild(5).GetChild(0).localRotation = Quaternion.Euler(0, 0, 0);
 
-
-
+            this.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().Shield.gameObject.SetActive(false);
             if (CompleteItemSpawn.transform.childCount == 1)
                 CompleteItemSpawn.transform.GetChild(0).gameObject.SetActive(true);
         }
@@ -188,10 +188,6 @@ public class ChampionIdentity : MonoBehaviour
             Gametimer += Time.deltaTime;
             //라운드 시작시 각 아이템 확인
 
-            if(sorakaSkill && ChampHP > 0)
-            {
-                // 전체힐------------------------------------
-            }
 
         }
 
@@ -304,7 +300,7 @@ public class ChampionIdentity : MonoBehaviour
         }
         else if (CompleteItem.name == "BeltBow") // 즈롯 - 기능구현 앞으로 10만큼 이동함 (어그로 받아줌)
         {
-            this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z + 100);
+            this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z + 70);
         }
         else if (CompleteItem.name == "BeltSword") // 지크 - 아군 전체 공격속도 0.1 빨라짐
         {
@@ -325,7 +321,7 @@ public class ChampionIdentity : MonoBehaviour
         }
         else if (CompleteItem.name == "BowBow") // 고연포 - 멀리서 때림
         {
-            this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z - 100);
+            this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z - 70);
         }
         else if (CompleteItem.name == "BowSword") // 거학 - 상대 체력 3% 만큼 추가 데미지
         {

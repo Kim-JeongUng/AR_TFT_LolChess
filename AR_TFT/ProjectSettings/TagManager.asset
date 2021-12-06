@@ -8,6 +8,7 @@ TagManager:
   - Item
   - Skill_Bullet
   - Bullet
+  - Shield
   layers:
   - Default
   - TransparentFX

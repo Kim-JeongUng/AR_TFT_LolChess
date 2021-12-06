@@ -35,6 +35,8 @@ public class BattleManager : MonoBehaviour
     public bool isTwistedfateSkillHit = false;
     float stunTimer = 0.0f;
 
+    public GameObject Shield;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -130,6 +132,16 @@ public class BattleManager : MonoBehaviour
             }
             if (this.name == "Janna") // 
             {
+                foreach (ChampionIdentity Team in this.transform.parent.parent.parent.GetComponentsInChildren<ChampionIdentity>())
+                {
+                    if (this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP > 0)
+                    {
+                        if (Team.ChampHP > 0)
+                        {
+                            Team.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().Shield.gameObject.SetActive(true);
+                        }
+                    }
+                }
             }
         }
         else
@@ -157,7 +169,7 @@ public class BattleManager : MonoBehaviour
                 float dis = Vector3.Distance(this.transform.position, Target.transform.position);
                 SkillDamage = dis * this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP * 0.01f;
             }
-            if (this.name == "Twistedfate") // 상대 스턴2초   데미지 : AP
+            if (this.name == "Twistedfate") // 상대 스턴3초   데미지 : AP
             {
                 skill.GetComponent<Bullet>().isTwistedfateSkill = true;
                 SkillDamage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP;
@@ -169,15 +181,15 @@ public class BattleManager : MonoBehaviour
     }
     public void Soraka_Skill()
     {
-            foreach (ChampionIdentity Team in this.transform.parent.parent.GetComponentsInChildren<ChampionIdentity>())
+            foreach (ChampionIdentity Team in this.transform.parent.parent.parent.GetComponentsInChildren<ChampionIdentity>())
             {
                 if (this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP > 0)
                 {
                     if (Team.ChampHP > 0)
                     {
                         Team.ChampHP += this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAP;
-                        Team.transform.GetComponent<BattleManager>().BeltTears.startColor = Color.white;
-                        Team.transform.GetComponent<BattleManager>().BeltTears.Play();  // 스킬 이펙트
+                        Team.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.startColor = Color.white;
+                        Team.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.Play();  // 스킬 이펙트
                     }
                 }
             }
