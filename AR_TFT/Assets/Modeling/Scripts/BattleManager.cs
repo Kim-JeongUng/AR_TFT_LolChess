@@ -39,6 +39,7 @@ public class BattleManager : MonoBehaviour
     private void FixedUpdate()
     {
         //attackSpeed = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAS;
+        //ChampAD = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD;
         anim.SetFloat("attackSpeed", attackSpeed);  // 공격딜레이, 공격속도에 영향
 
         if (Input.GetKeyDown(KeyCode.A))  // 전투마커 인식 시 실행
@@ -100,7 +101,8 @@ public class BattleManager : MonoBehaviour
     {
         GameObject skill = Instantiate(skill_Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
         bulletTarget = skill.GetComponent<Bullet>();
-        bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언으로 교체 필요함-----------------
+        bulletTarget.Target = Target.transform;  
+        bulletTarget.damage = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAD;
     }
     public void firebullet(GameObject Target)
     {
