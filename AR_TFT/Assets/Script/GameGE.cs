@@ -36,8 +36,8 @@ public class GameGE : MonoBehaviour
     public int Round; //게임 라운드
 
     public GameObject Red_win_text,Red_lose_text,Blue_win_text,Blue_lose_text;//승리여부 메세지
-
-    public static float time;
+    public GameObject GameOver_red,GameOver_blue;
+    public float time;
 
 
     // Start is called before the first frame update
