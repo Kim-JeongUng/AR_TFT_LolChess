@@ -196,7 +196,7 @@ public class ChampionIdentity : MonoBehaviour
             this.transform.GetChild(5).GetChild(0).gameObject.GetComponent<Animator>().SetBool("Death", true);
         }
 
-        if (isBeltTears || isSwordTears || isBowWand || isTearsWand) // 구원 / 쇼진 / 구인수 / 대천사
+        if (isBeltTears || isSwordTears || isBowWand || isTearsWand || isBeltWand) // 구원 / 쇼진 / 구인수 / 대천사 / 모렐로
         {
             ItemTimer += Time.deltaTime;
             if (ItemTimer > 3.0f)
@@ -213,23 +213,25 @@ public class ChampionIdentity : MonoBehaviour
                 {
                     foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
                     {
-                        Team.ChampHP += 10;
-                        this.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.Play();  // 구원 이팩트 재생
-                        //Team.GetComponent<effect>heal
+                        if (Team.ChampHP >= 0)
+                        {
+                            Team.ChampHP += 10;
+                            Team.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.startColor = Color.white;
+                            Team.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.Play();  // 구원 이팩트 재생
+                        }
                     }
                 }
-            }
-        }
-        
-        if(isBeltWand) //모렐로
-        {
-            ItemTimer += Time.deltaTime;
-            if (ItemTimer > 3.0f)
-            {
-                ItemTimer = 0.0f;
-                foreach (ChampionIdentity Enemy in this.transform.parent.GetComponent<Board>().Enemy.GetComponent<Board>().GetComponentsInChildren<ChampionIdentity>())
+                else if (isBeltWand)
                 {
-                    Enemy.ChampHP -= 10;
+                    foreach (ChampionIdentity Enemy in this.transform.parent.GetComponent<Board>().Enemy.GetComponent<Board>().GetComponentsInChildren<ChampionIdentity>())
+                    {
+                        if (Enemy.ChampHP <= 0)
+                        {
+                            Enemy.ChampHP -= 10;
+                            Enemy.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.startColor = Color.black;
+                            Enemy.transform.GetChild(5).GetChild(0).GetComponent<BattleManager>().BeltTears.Play();
+                        }
+                    }
                 }
             }
         }
@@ -274,7 +276,6 @@ public class ChampionIdentity : MonoBehaviour
             if (PickItems.name == Item1.name + Item2.name || PickItems.name == Item2.name + Item1.name)
             {
                 CompleteItem = PickItems;
-                Debug.Log("PICK!" + CompleteItem.name);
             }
         }
         if(CompleteItemSpawn.transform.childCount==0)

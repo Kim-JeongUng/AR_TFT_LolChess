@@ -1758,7 +1758,6 @@ Transform:
   - {fileID: 714424549}
   - {fileID: 739446157}
   - {fileID: 2103677465}
-  - {fileID: 1347312226}
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8740,6 +8739,21 @@ PrefabInstance:
       propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 16133262096074709, guid: cc37e6852e209ed40839dc023d496ad9,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 16133262096074709, guid: cc37e6852e209ed40839dc023d496ad9,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 16133262096074709, guid: cc37e6852e209ed40839dc023d496ad9,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1578367269830065442, guid: cc37e6852e209ed40839dc023d496ad9,
         type: 3}
       propertyPath: m_Name
@@ -8999,6 +9013,21 @@ PrefabInstance:
         type: 3}
       propertyPath: looping
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 16133262096074709, guid: cc37e6852e209ed40839dc023d496ad9,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 16133262096074709, guid: cc37e6852e209ed40839dc023d496ad9,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 16133262096074709, guid: cc37e6852e209ed40839dc023d496ad9,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1578367269830065442, guid: cc37e6852e209ed40839dc023d496ad9,
         type: 3}
@@ -10899,11 +10928,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347312225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18, y: 10.2, z: -38}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 36, y: 20.4, z: -132}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
-  m_Father: {fileID: 202911296}
-  m_RootOrder: 6
+  m_Father: {fileID: 543450652817925363}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &1361824234
 Material:
