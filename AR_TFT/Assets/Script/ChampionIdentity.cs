@@ -54,81 +54,81 @@ public class ChampionIdentity : MonoBehaviour
         // 기본 스텍 정의
         if (ChampName == "Vayne")//공속위주
         {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampFullAD = 50;
-            ChampAD = 50;
-            ChampFullAP = 50;
-            ChampAP = 50;
-            ChampFullAS = 1.1f;
-            ChampAS = 1.1f;
-            ChampFullSkillTime = 5.0f;
-            ChampSkillTime = 5.0f;
+            ChampFullHP = 515;
+            ChampHP = 515;
+            ChampFullAD = 60;
+            ChampAD = 60;
+            ChampFullAP = 60;
+            ChampAP = 60;
+            ChampFullAS = 0.658f;
+            ChampAS = 0.658f;
+            ChampFullSkillTime = 12f;
+            ChampSkillTime = 12f;
         }
         if (ChampName == "Soraka")//탱위주
         {
-            ChampFullHP = 600;
-            ChampHP = 600;
+            ChampFullHP = 535;
+            ChampHP = 535;
             ChampFullAD = 50;
             ChampAD = 50;
             ChampFullAP = 50;
             ChampAP = 50;
-            ChampFullAS = 0.5f;
-            ChampAS = 0.5f;
-            ChampFullSkillTime = 3.0f;
-            ChampSkillTime = 3.0f;
+            ChampFullAS = 0.625f;
+            ChampAS = 0.625f;
+            ChampFullSkillTime = 6f;
+            ChampSkillTime = 6f;
         }
         if (ChampName == "Janna")//보호막스킬위주
         {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampFullAD = 50;
-            ChampAD = 50;
-            ChampFullAP = 50;
-            ChampAP = 100;
-            ChampFullAS = 0.5f;
-            ChampAS = 0.5f;
-            ChampFullSkillTime = 5.0f;
-            ChampSkillTime = 5.0f;
+            ChampFullHP = 500;
+            ChampHP = 500;
+            ChampFullAD = 52;
+            ChampAD = 52;
+            ChampFullAP = 52;
+            ChampAP = 52;
+            ChampFullAS = 0.625f;
+            ChampAS = 0.625f;
+            ChampFullSkillTime = 10f;
+            ChampSkillTime = 10f;
         }
         if (ChampName == "Caitlyn")//공격력위주
         {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampFullAD = 80;
-            ChampAD = 80;
-            ChampFullAP = 50;
-            ChampAP = 50;
-            ChampFullAS = 0.7f;
-            ChampAS = 0.7f;
-            ChampFullSkillTime = 5.0f;
-            ChampSkillTime = 5.0f;
+            ChampFullHP = 510;
+            ChampHP = 510;
+            ChampFullAD = 62;
+            ChampAD = 62;
+            ChampFullAP = 62;
+            ChampAP = 62;
+            ChampFullAS = 0.625f;
+            ChampAS = 0.625f;
+            ChampFullSkillTime = 10f;
+            ChampSkillTime = 10f;
         }
         if (ChampName == "Nidalee")//평타스킬 밸런스
         {
-            ChampFullHP = 500;
-            ChampHP = 500;
-            ChampFullAD = 70;
-            ChampAD = 70;
-            ChampFullAP = 50;
-            ChampAP = 50;
-            ChampFullAS = 0.8f;
-            ChampAS = 0.8f;
-            ChampFullSkillTime = 5.0f;
-            ChampSkillTime = 5.0f;
+            ChampFullHP = 570;
+            ChampHP = 570;
+            ChampFullAD = 58;
+            ChampAD = 58;
+            ChampFullAP = 58;
+            ChampAP = 58;
+            ChampFullAS = 0.638f;
+            ChampAS = 0.638f;
+            ChampFullSkillTime = 6f;
+            ChampSkillTime = 6f;
         }
         if (ChampName == "Twistedfate")//딜스킬 위주
         {
-            ChampFullHP = 450;
-            ChampHP = 450;
-            ChampFullAD = 50;
-            ChampAD = 50;
-            ChampFullAP = 100;
-            ChampAP = 100;
-            ChampFullAS = 0.4f;
-            ChampAS = 0.4f;
-            ChampFullSkillTime = 4.0f;
-            ChampSkillTime = 4.0f;
+            ChampFullHP = 534;
+            ChampHP = 534;
+            ChampFullAD = 52;
+            ChampAD = 52;
+            ChampFullAP = 52;
+            ChampAP = 52;
+            ChampFullAS = 0.651f;
+            ChampAS = 0.651f;
+            ChampFullSkillTime = 6f;
+            ChampSkillTime = 6f;
         }
     }
 
