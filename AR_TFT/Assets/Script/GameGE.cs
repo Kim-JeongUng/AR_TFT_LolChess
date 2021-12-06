@@ -63,14 +63,14 @@ public class GameGE : MonoBehaviour
             //GameOver(BlueBoard, RedBoard); //이긴팀, 진팀 다른 화면 출력
         }
 
-        /*else if (RedBoard.GetComponent<Board>().PlayerHP <= 0)
+        else if (RedBoard.GetComponent<Board>().PlayerHP <= 0)
         {
             //레드팀이 짐
-        }*/
+        }
 
         // 보드에 챔피언들을 찾음
         else if (BlueBoard.GetComponent<Board>().EqupChampionCount > 0 && RedBoard.GetComponent<Board>().EqupChampionCount > 0) // && RedBoard.GetComponent<Board>().EqupChampionCount == 3 
-        {
+        { 
             if (!isGamePlaying)
             {
                 if (!isGamePlaying && GameCard) // 게임 시작 카드 확인
@@ -80,28 +80,27 @@ public class GameGE : MonoBehaviour
                     isGamePlaying = true;
                 }
             }
-            else if (isGamePlaying) 
+            else if (isGamePlaying)
             {
-                if (BlueBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && BlueBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
+                int SumBlueTeamHP = 0;
+                int SumRedTeamHP = 0;
+                foreach (ChampionIdentity BlueTeamHP in BlueBoard.GetComponentsInChildren<ChampionIdentity>()){
+                    SumBlueTeamHP+= BlueTeamHP.ChampHP;
+                }
+                if(SumBlueTeamHP == 0)
                 {
-                    //블루 팀 라운드 패 
-                    for(int i=0; i < 3; i++)  // 3 대신 현재 장착되어 있는 챔피언 수로 교체 필요**************************************************
-                    {
-                        RedBoard.GetComponent<Board>().MyChampion[i].GetComponent<Animator>().SetBool("Attack", false);  // 승리한 레드 팀 Attack 애니메이션 종료
-                    }
-                    BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7; // 라운드 *3 만큼
-                    Debug.Log("RedBoard Win GameOver!!!!!!!!!!!!!!");
+                    Debug.Log("RedBoard Win RoundOver!!!!!!!!!!!!!!");
+                    BlueBoard.GetComponent<Board>().PlayerHP -= Round * 7;
                     isGamePlaying = false;
                 }
-                else if (RedBoard.GetComponent<Board>().MyChampion[0].GetComponent<ChampionIdentity>().ChampHP <= 0 && RedBoard.GetComponent<Board>().MyChampion[1].GetComponent<ChampionIdentity>().ChampHP <= 0 && RedBoard.GetComponent<Board>().MyChampion[2].GetComponent<ChampionIdentity>().ChampHP <= 0)
+                foreach (ChampionIdentity RedTeamHP in RedBoard.GetComponentsInChildren<ChampionIdentity>())
                 {
-                    //레드 팀 라운드 패
-                    for (int i = 0; i < 3; i++)  // 3 대신 현재 장착되어 있는 챔피언 수로 교체 필요**********************************************
-                    {
-                        BlueBoard.GetComponent<Board>().MyChampion[i].GetComponent<Animator>().SetBool("Attack", false);  // 승리한 블루 팀 Attack 애니메이션 종료
-                    }
+                    SumRedTeamHP += RedTeamHP.ChampHP;
+                }
+                if (SumRedTeamHP == 0)
+                {
+                    Debug.Log("BlueBoard Win RoundOver!!!!!!!!!!!!!!");
                     RedBoard.GetComponent<Board>().PlayerHP -= Round * 7;
-                    Debug.Log("BlueBoard Win GameOver!!!!!!!!!!!!!!");
                     isGamePlaying = false;
                 }
                 for (int i = 0; i < 3; i++)  // 3 대신 현재 장착되어 있는 챔피언 수로 교체 필요******************************************************

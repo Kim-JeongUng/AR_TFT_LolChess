@@ -36,7 +36,7 @@ public class ChampionIdentity : MonoBehaviour
 
     public float Gametimer = 0;
 
-    float ItemTimer = 0.0f;
+    public float ItemTimer = 0.0f;
 
     //아이템
     bool isBeltTears = false;  //구원
@@ -44,6 +44,8 @@ public class ChampionIdentity : MonoBehaviour
     bool isSwordTears = false; //쇼진
     bool isBowWand = false; //구인수
     bool isTearsWand = false; //대천사
+
+    bool GameStartOnceCheck = true;
 
     // Start is called before the first frame update
     void Start()
@@ -154,17 +156,27 @@ public class ChampionIdentity : MonoBehaviour
             HPblack.SetActive(false);
             isBeltTears = false;
             ItemTimer = 0.0f;
+            GameStartOnceCheck = true;
+
+            if (CompleteItemSpawn.transform.childCount == 1)
+                CompleteItemSpawn.transform.GetChild(0).gameObject.SetActive(false);
         }
         else if (GameGE.isGamePlaying)
         {
+            if (GameStartOnceCheck) // 게임시작시 한번만 실행
+            {
+                if (this.GetComponent<ChampionCard>().MyItem[0] != null && this.GetComponent<ChampionCard>().MyItem[1] != null)
+                {
+                    GetCompleteItem(this.GetComponent<ChampionCard>().MyItem[0], this.GetComponent<ChampionCard>().MyItem[1]);
+                }
+                HPred.SetActive(true);
+                HPblack.SetActive(true);
+                GameStartOnceCheck = false;
+            }
             Gametimer += Time.deltaTime;
-            HPred.SetActive(true);
-            HPblack.SetActive(true);
-
             //라운드 시작시 각 아이템 확인
-            if (!this.GetComponent<ChampionCard>().MyItem[0] || !this.GetComponent<ChampionCard>().MyItem[0]) { }
-            else
-                GetCompleteItem(this.GetComponent<ChampionCard>().MyItem[0], this.GetComponent<ChampionCard>().MyItem[1]);
+
+            
         }
 
         if (ChampHP <= 0 && GameGE.isGamePlaying)
@@ -213,7 +225,6 @@ public class ChampionIdentity : MonoBehaviour
     //테스트 완료
     public void GetNewItem(GameObject NewItem)
     {
-        Debug.Log(NewItem);
         if (NewItem.name == "Belt")
         {
             ChampFullHP += 200;
@@ -240,10 +251,6 @@ public class ChampionIdentity : MonoBehaviour
             ChampFullAP += 30;
             ChampAP += 30;
         }
-        if (!this.GetComponent<ChampionCard>().MyItem[0] || !this.GetComponent<ChampionCard>().MyItem[0]) { }
-
-        else
-            GetCompleteItem(this.GetComponent<ChampionCard>().MyItem[0], this.GetComponent<ChampionCard>().MyItem[1]);
     }
 
     //테스트 미시도
@@ -256,78 +263,78 @@ public class ChampionIdentity : MonoBehaviour
             {
                 CompleteItem = PickItems;
                 Debug.Log("PICK!" + CompleteItem.name);
-
-                Instantiate(CompleteItem, CompleteItemSpawn.transform.position, Quaternion.identity);
-
-                //삭제를 해야하나?
-                Destroy(this.GetComponent<CardCheckItem>().ItemSlotSpace[0]);
-                Destroy(this.GetComponent<CardCheckItem>().ItemSlotSpace[1]);
-
-                if (CompleteItem.name == "BeltBelt")  //워모그
-                {
-                    ChampFullHP += 200;
-                    ChampHP += 200;
-                    // 기능 구현 - 체력 + 200 (총 600)
-                }
-                else if (CompleteItem.name == "BeltBow") // 즈롯 - 기능구현 앞으로 10만큼 이동함 (어그로 받아줌)
-                {
-                    this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z + 100);
-                }
-                else if (CompleteItem.name == "BeltSword") // 지크 - 아군 전체 공격속도 0.1 빨라짐
-                {
-                    foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
-                    {
-                        Team.ChampAS += 0.1f;
-                    }
-                }
-                else if (CompleteItem.name == "BeltTears") // 구원  3초마다 아군 체력 +10
-                {
-                    isBeltTears = true;
-                }
-                else if (CompleteItem.name == "BeltWand") // 모렐 3초마다 상대 체력 -10
-                {
-                    isBeltWand = true;
-                }
-                else if (CompleteItem.name == "BowBow") // 고연포 - 멀리서 때림
-                {
-                    this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z - 100);
-                }
-                else if (CompleteItem.name == "BowSword") // 거학 - 체력비례
-                {
-                }
-                else if (CompleteItem.name == "BowTears") // 얼심 - 상대 공속 - 10
-                {
-                    foreach (ChampionIdentity Enemy in this.transform.parent.GetComponent<Board>().Enemy.GetComponent<Board>().GetComponentsInChildren<ChampionIdentity>())
-                    {
-                        Enemy.ChampAS -= 10;
-                    }
-                }
-                else if (CompleteItem.name == "BowWand") // 구인수 - 공속 - 게임시간비례 더 늘어나게
-                {
-                    isBowWand = true;
-                }
-                else if (CompleteItem.name == "SwordSword") // 죽검 - 공격력 뻥튀기
-                {
-                    ChampAD += 30;
-                }
-                else if (CompleteItem.name == "SwordTears") // 쇼진
-                {
-                    isSwordTears = true;
-                }
-                else if (CompleteItem.name == "SwordWand") // 총검
-                {
-                }
-                else if (CompleteItem.name == "TearsTears") //블루
-                {
-                }
-                else if (CompleteItem.name == "TearsWand") //대천사
-                {
-                    isTearsWand = true;
-                }
-                else if (CompleteItem.name == "WandWand") //
-                {
-                }
             }
+        }
+        if(CompleteItemSpawn.transform.childCount==0)
+            Instantiate(CompleteItem, CompleteItemSpawn.transform.position, Quaternion.identity, CompleteItemSpawn.transform);
+
+        CompleteItemSpawn.transform.GetChild(0).gameObject.SetActive(true);
+        this.GetComponent<CardCheckItem>().ItemSlotSpace[0].transform.GetChild(0).gameObject.SetActive(false);
+        this.GetComponent<CardCheckItem>().ItemSlotSpace[1].transform.GetChild(0).gameObject.SetActive(false);
+
+        if (CompleteItem.name == "BeltBelt")  //워모그
+        {
+            ChampFullHP += 200;
+            ChampHP += 200;
+            // 기능 구현 - 체력 + 200 (총 600)
+        }
+        else if (CompleteItem.name == "BeltBow") // 즈롯 - 기능구현 앞으로 10만큼 이동함 (어그로 받아줌)
+        {
+            this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z + 100);
+        }
+        else if (CompleteItem.name == "BeltSword") // 지크 - 아군 전체 공격속도 0.1 빨라짐
+        {
+            foreach (ChampionIdentity Team in this.transform.parent.GetComponentsInChildren<ChampionIdentity>())
+            {
+                Team.ChampAS += 0.1f;
+            }
+        }
+        else if (CompleteItem.name == "BeltTears") // 구원  3초마다 아군 체력 +10
+        {
+            isBeltTears = true;
+        }
+        else if (CompleteItem.name == "BeltWand") // 모렐 3초마다 상대 체력 -10
+        {
+            isBeltWand = true;
+        }
+        else if (CompleteItem.name == "BowBow") // 고연포 - 멀리서 때림
+        {
+            this.transform.GetChild(5).GetChild(0).localPosition = new Vector3(this.transform.GetChild(5).GetChild(0).localPosition.x, this.transform.GetChild(5).GetChild(0).localPosition.y, this.transform.GetChild(5).GetChild(0).localPosition.z - 100);
+        }
+        else if (CompleteItem.name == "BowSword") // 거학 - 체력비례
+        {
+        }
+        else if (CompleteItem.name == "BowTears") // 얼심 - 상대 공속 - 10
+        {
+            foreach (ChampionIdentity Enemy in this.transform.parent.GetComponent<Board>().Enemy.GetComponent<Board>().GetComponentsInChildren<ChampionIdentity>())
+            {
+                Enemy.ChampAS -= 10;
+            }
+        }
+        else if (CompleteItem.name == "BowWand") // 구인수 - 공속 - 게임시간비례 더 늘어나게
+        {
+            isBowWand = true;
+        }
+        else if (CompleteItem.name == "SwordSword") // 죽검 - 공격력 뻥튀기
+        {
+            ChampAD += 30;
+        }
+        else if (CompleteItem.name == "SwordTears") // 쇼진
+        {
+            isSwordTears = true;
+        }
+        else if (CompleteItem.name == "SwordWand") // 총검
+        {
+        }
+        else if (CompleteItem.name == "TearsTears") //블루
+        {
+        }
+        else if (CompleteItem.name == "TearsWand") //대천사
+        {
+            isTearsWand = true;
+        }
+        else if (CompleteItem.name == "WandWand") //
+        {
         }
         
     }
