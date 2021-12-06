@@ -22,17 +22,18 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Champion")  // 캐릭터에 태그를 달아놨는데 이거를 블루/레드 상대편 챔피언이면 으로 바꿔야 할듯********************
+        if (other.CompareTag("Champion"))  // 캐릭터에 태그를 달아놨는데 이거를 블루/레드 상대편 챔피언이면 으로 바꿔야 할듯********************
         {
             if (isTwistedfateSkill && other.GetComponent<Animator>().GetBool("Attack"))
             {
-                other.GetComponent<ChampionIdentity>().isTwistedfateSkillHit = true;
+                other.transform.GetComponent<BattleManager>().isTwistedfateSkillHit = true;
             }
-            Debug.Log("Bullet Trigger Champion");
             other.transform.parent.parent.GetComponent<ChampionIdentity>().ChampHP -= damage;  //발사하는 캐릭터의 공격력 만큼 감소
             // 스킬 => 발사하는 캐릭터의 ap계수만큼 맞은적 hp감소
             Destroy(gameObject);  // 총알 삭제
         }
+
+        Destroy(gameObject,3.0f);  // 총알 삭제
     }
     // Start is called before the first frame update
     void Start()
