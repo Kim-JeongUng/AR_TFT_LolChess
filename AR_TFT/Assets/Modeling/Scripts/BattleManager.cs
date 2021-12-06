@@ -38,6 +38,7 @@ public class BattleManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //attackSpeed = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAS;
         anim.SetFloat("attackSpeed", attackSpeed);  // 공격딜레이, 공격속도에 영향
 
         if (Input.GetKeyDown(KeyCode.A))  // 전투마커 인식 시 실행
@@ -61,7 +62,7 @@ public class BattleManager : MonoBehaviour
                 {
                     skillEfect.Play();
                     fireSkill(target);
-
+                    Debug.Log("Fire Skill~~~~~~~~~~~~~~~~~~~~~~");
                     anim.SetBool("Skill", false);
                     skillcount = 0;
 
@@ -75,6 +76,8 @@ public class BattleManager : MonoBehaviour
             }
         }
 
+
+        //---------테스트용----------------------------
         //-------------(실행 조건 없음)----------------
         if (Input.GetKeyDown(KeyCode.S))  // 공격종료 조건 없음
         {
@@ -91,6 +94,7 @@ public class BattleManager : MonoBehaviour
             anim.SetBool("Death", false); // 다시 살아남
             anim.SetBool("Attack", false);
         }
+        //-----------------------------------------
     }
     public void fireSkill(GameObject Target)
     {
