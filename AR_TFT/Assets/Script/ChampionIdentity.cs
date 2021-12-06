@@ -252,9 +252,8 @@ public class ChampionIdentity : MonoBehaviour
     {
         if (NewItem.name == "Belt")
         {
-            ChampFullHP += 200;
-            ChampHP += 200;
-            Debug.Log("AAB");
+            ChampFullHP += 150;
+            ChampHP += 150;
         }
         if (NewItem.name == "Bow")
         { 
@@ -279,7 +278,7 @@ public class ChampionIdentity : MonoBehaviour
     }
 
     //테스트 미시도
-    public void GetCompleteItem(GameObject Item1, GameObject Item2) // 완성 아이템 관여
+    public void GetCompleteItem(GameObject Item1, GameObject Item2) // 장착 아이템이 2개일 때 완성 아이템 관여
     {
         foreach (GameObject PickItems in GameManager.CompleteItems)
         {
@@ -301,7 +300,6 @@ public class ChampionIdentity : MonoBehaviour
         {
             ChampFullHP += 200;
             ChampHP += 200;
-            // 기능 구현 - 체력 + 200 (총 600)
         }
         else if (CompleteItem.name == "BeltBow") // 즈롯 - 기능구현 앞으로 10만큼 이동함 (어그로 받아줌)
         {
