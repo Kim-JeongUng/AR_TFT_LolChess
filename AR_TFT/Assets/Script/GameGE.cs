@@ -73,6 +73,19 @@ public class GameGE : MonoBehaviour
         { 
             if (!isGamePlaying)
             {
+                //게임중이 아닐 때 IDLE상태 유지, 캔버스
+                foreach (Animator AllChampion in BlueBoard.GetComponentsInChildren<Animator>())
+                {
+                    AllChampion.SetBool("Attack", false);
+                    AllChampion.SetBool("Death", false);
+                }
+
+                foreach (Animator AllChampion in RedBoard.GetComponentsInChildren<Animator>())
+                {
+                    AllChampion.SetBool("Attack", false);
+                    AllChampion.SetBool("Death", false);
+                }
+
                 if (!isGamePlaying && GameCard) // 게임 시작 카드 확인
                 {
                     Round++; //라운드
@@ -137,7 +150,6 @@ public class GameGE : MonoBehaviour
     // 가까운 적 찾기
     public void LookAroundEnemyChamp(GameObject[] OurCard, int index) 
     {
-        Debug.Log(OurCard[index].transform.parent.name);
         if (OurCard[index].transform.parent.name == "RedBoard")
         {
             EnemyBoard = BlueBoard;

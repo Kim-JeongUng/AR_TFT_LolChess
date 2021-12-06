@@ -525,7 +525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3341357045457515232}
   m_LocalRotation: {x: -0.39195418, y: 0.5885338, z: -0.539169, w: -0.45748952}
-  m_LocalPosition: {x: -0.02052537, y: 0.13237783, z: 0.0017826938}
+  m_LocalPosition: {x: -0.02, y: 0.132, z: 0.002}
   m_LocalScale: {x: 0.9999999, y: 0.99999976, z: 0.9999998}
   m_Children:
   - {fileID: 3341357045346279640}
@@ -1197,6 +1197,7 @@ MonoBehaviour:
   skillEfect: {fileID: 3341357045946682396}
   Bullet: {fileID: 4975418967423007985, guid: a0bfb4a83d90aa1498044f965f0d3214, type: 3}
   bulletPos: {fileID: 3341357045813009943}
+  skill_Bullet: {fileID: 0}
 --- !u!136 &3341357045852772139
 CapsuleCollider:
   m_ObjectHideFlags: 0
