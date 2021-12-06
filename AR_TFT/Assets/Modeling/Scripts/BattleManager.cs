@@ -61,6 +61,8 @@ public class BattleManager : MonoBehaviour
                 if (anim.GetCurrentAnimatorStateInfo(0).IsTag("skillanimation"))
                 {
                     skillEfect.Play();
+
+
                     fireSkill(target);
                     Debug.Log("Fire Skill~~~~~~~~~~~~~~~~~~~~~~");
                     anim.SetBool("Skill", false);
@@ -98,9 +100,16 @@ public class BattleManager : MonoBehaviour
     }
     public void fireSkill(GameObject Target)
     {
-        GameObject skill = Instantiate(skill_Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
-        bulletTarget = skill.GetComponent<Bullet>();
-        bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언으로 교체 필요함-----------------
+        if (this.name == "Soraka" || this.name == "Janna")
+        {
+            //소라카 잔나 스킬 구현
+        }
+        else
+        {
+            GameObject skill = Instantiate(skill_Bullet, bulletPos.transform.position, bulletPos.transform.rotation);
+            bulletTarget = skill.GetComponent<Bullet>();
+            bulletTarget.Target = Target.transform;  // 가장 가까운 상대 챔피언으로 교체 필요함-----------------
+        }
     }
     public void firebullet(GameObject Target)
     {
