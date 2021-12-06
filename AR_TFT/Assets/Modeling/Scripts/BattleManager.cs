@@ -38,7 +38,7 @@ public class BattleManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        attackSpeed = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAS;
+        //attackSpeed = this.transform.parent.parent.GetComponent<ChampionIdentity>().ChampAS;
         anim.SetFloat("attackSpeed", attackSpeed);  // 공격딜레이, 공격속도에 영향
 
         if (Input.GetKeyDown(KeyCode.A))  // 전투마커 인식 시 실행
@@ -62,7 +62,7 @@ public class BattleManager : MonoBehaviour
                 {
                     skillEfect.Play();
                     fireSkill(target);
-
+                    Debug.Log("Fire Skill~~~~~~~~~~~~~~~~~~~~~~");
                     anim.SetBool("Skill", false);
                     skillcount = 0;
 
