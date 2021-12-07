@@ -245,7 +245,6 @@ public class ChampionIdentity : MonoBehaviour
         }
     }
 
-    //테스트 완료
     public void GetNewItem(GameObject NewItem)
     {
         if (NewItem.name == "Belt")
@@ -275,7 +274,6 @@ public class ChampionIdentity : MonoBehaviour
         }
     }
 
-    //테스트 미시도
     public void GetCompleteItem(GameObject Item1, GameObject Item2) // 장착 아이템이 2개일 때 완성 아이템 관여
     {
         foreach (GameObject PickItems in GameManager.CompleteItems)
@@ -309,8 +307,6 @@ public class ChampionIdentity : MonoBehaviour
                 Team.ChampAS += 0.1f;
             }
         }
-        //구원 죽은애는 ㄴㄴ 하게 구원 에니메이션 팀 전부 / 캔버스 끝나고 안뜸 / 베인 일반공격 이상 / 트페 이상함 / 베인 레이저 ??
-        // 
         else if (CompleteItem.name == "BeltTears") // 구원  3초마다 아군 체력 +10
         {
             isBeltTears = true;
