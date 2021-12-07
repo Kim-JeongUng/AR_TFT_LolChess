@@ -129,8 +129,8 @@ public class ChampionIdentity : MonoBehaviour
             ChampHP = 534;
             ChampFullAD = 60;
             ChampAD = 60;
-            ChampFullAP = 52;
-            ChampAP = 52;
+            ChampFullAP = 60;
+            ChampAP = 60;
             ChampFullAS = 0.651f;
             ChampAS = 0.651f;
             ChampFullSkillTime = 10f;
