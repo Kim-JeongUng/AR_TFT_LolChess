@@ -3,7 +3,7 @@
 리그오브레전드 전략적 팀 게임을 AR보드게임으로 만나보세요   
 캐릭터를 뽑고, 아이템을 장착시켜 상황별 플레이를 할 수 있습니다.
 <img width="80%" src="https://user-images.githubusercontent.com/82865325/144972972-9d992029-0628-4e48-9b4c-3cba041e8a32.jpg">   
-최종 플레이 영상 -> **https://www.youtube.com/watch?v=NX20udAyfS0**
+최종 플레이 영상 -> **https://youtu.be/ipIZVzVQ0Qk**
 <br><br>
 ## 게임 요약
 - 턴제로 진해오디는 게임으로, 챔피언 카드와 아이템 카드를 뽑아 전략을 구사하여 상대방과 AR가상 전투를 하는 게임
@@ -51,5 +51,5 @@
 14. 전투 이펙트 일부 추가
 15. 챔피언간 전투 -> https://youtu.be/FUtW8kX9Yog
 16. 아이템 능력 및 챔피언 스킬 구현
-17. [최종 플레이 영상](https://www.youtube.com/watch?v=NX20udAyfS0)
+17. [최종 플레이 영상](https://youtu.be/ipIZVzVQ0Qk)
 18. [최종 발표 PPT DownLoad](https://github.com/Kim-JeongUng/AR_TFT_LolChess/raw/main/%ED%85%80%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EA%B3%84%ED%9A%8D%EC%9E%90%EB%A3%8C_%EA%B9%80%EC%A0%95%EC%9B%85%2C%EC%9D%B4%EC%8A%B9%EC%96%B8%2C%EC%9D%B4%ED%99%94%EC%A4%80.pptx)
