@@ -6,7 +6,7 @@
 최종 플레이 영상 -> **https://youtu.be/ipIZVzVQ0Qk**
 <br><br>
 ## 게임 요약
-- 턴제로 진해오디는 게임으로, 챔피언 카드와 아이템 카드를 뽑아 전략을 구사하여 상대방과 AR가상 전투를 하는 게임
+- 라운드제로 진행 되는 게임으로, 챔피언 카드와 아이템 카드를 뽑아 전략을 구사하여 상대방과 AR가상 전투를 하는 게임
 - [TFT(롤토체스)](https://namu.wiki/w/%EB%A6%AC%EA%B7%B8%20%EC%98%A4%EB%B8%8C%20%EB%A0%88%EC%A0%84%EB%93%9C/%EC%A0%84%EB%9E%B5%EC%A0%81%20%ED%8C%80%20%EC%A0%84%ED%88%AC "TFT(롤토체스)")를 모티브로 AR구현해 제작한 [TCG](https://namu.wiki/w/%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%94%A9%20%EC%B9%B4%EB%93%9C%20%EA%B2%8C%EC%9E%84?from=TCG) 장르
 
 ## 가상버튼
